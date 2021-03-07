@@ -1,6 +1,8 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import './components/footer';
+@import './components/header';
 @import './pages/home';
+@import './generics';
 
 html {
 	height: 100%;
@@ -42,4 +44,8 @@ body::-webkit-scrollbar {
 
 #__next::-webkit-scrollbar {
 	display: none;
+}
+
+.content {
+	padding: 20px;
 }

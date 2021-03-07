@@ -1,0 +1,11 @@
+.link {
+	color: black;
+}
+
+.link:active {
+	color: #007bff;
+}
+
+.link:hover {
+	color: lighten(#000000, 30%);
+}

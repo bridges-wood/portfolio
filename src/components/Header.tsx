@@ -8,15 +8,21 @@ const Header = () => {
 			<Navbar expand='sm' sticky='top' collapseOnSelect>
 				<Navbar.Brand>
 					<Link href='/'>
-						<img alt='Max Wood' />
+						<img className='brand' src='/images/logo.png' alt='Max Wood' />
 					</Link>
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse>
 					<Nav className='mr-auto'>
-						<Link href='/projects'>Projects</Link>
-						<Link href='/about'>About</Link>
-						<Link href='/contact'>Contact</Link>
+						<Link href='/projects' passHref>
+							<a className='link'>Projects</a>
+						</Link>
+						<Link href='/about' passHref>
+							<a className='link'>About</a>
+						</Link>
+						<Link href='/contact' passHref>
+							<a className='link'>Contact</a>
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>

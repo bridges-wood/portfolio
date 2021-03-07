@@ -1,0 +1,17 @@
+.brand {
+	height: 50px;
+	margin-left: 0.6em;
+}
+
+.navbar {
+	padding: 0.5em;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.navbar :is(.link) {
+	margin-left: 1em;
+	padding: 0.5rem;
+	text-decoration: none;
+}
