@@ -1,32 +1,10 @@
 import { Octokit } from '@octokit/core'
-import { Project, ProjectsResponse, Repository } from '@typings/api/Projects'
+import { GithubProject, Repository } from '@typings/api/Projects'
 import { JSDOM } from 'jsdom'
-import { NextApiRequest, NextApiResponse } from 'next'
-import fetch from 'node-fetch'
 
 const octokit = new Octokit({ auth: process.env.GH_API_KEY })
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	switch (req.method) {
-		case 'GET':
-			return await get(req, res)
-	}
-}
-
-const get = async (
-	req: NextApiRequest,
-	res: NextApiResponse<ProjectsResponse>
-) => {
-	try {
-		const projects = await fetchProjects()
-		res.status(200).json({ projects })
-	} catch (e) {
-		console.log('e', e)
-		res.status(500).json({ error: e.message })
-	}
-}
-
-const fetchProjects = async (): Promise<Project[]> => {
+const fetchProjects = async (): Promise<GithubProject[]> => {
 	const { data: repositories } = await octokit.request(
 		'GET /users/{username}/repos',
 		{
@@ -36,7 +14,7 @@ const fetchProjects = async (): Promise<Project[]> => {
 	return await Promise.all(repositories.map(parseRepo))
 }
 
-const parseRepo = async (repo: Repository): Promise<Project> => {
+const parseRepo = async (repo: Repository): Promise<GithubProject> => {
 	return {
 		id: repo.id,
 		name: repo.name,
@@ -69,7 +47,7 @@ const getREADME = async ({
 		return buffer.toString()
 	} catch (e) {
 		console.error(e.message)
-		return undefined
+		return null
 	}
 }
 
@@ -100,4 +78,4 @@ const getMetadata = async ({ html_url }: Repository) => {
 	return undefined
 }
 
-export default handler
+export default fetchProjects

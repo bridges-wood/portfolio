@@ -2,13 +2,13 @@ export interface ProjectsRequest {}
 
 export type ProjectsResponse =
 	| {
-			projects: Project[]
+			projects: GithubProject[]
 	  }
 	| {
 			error: string
 	  }
 
-export interface Project {
+export interface GithubProject {
 	README?: string
 	mainLanguage: string
 	languages: {
