@@ -1,6 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
-import Footer from '../components/Footer'
 
 class PortfolioDoc extends Document {
 	render() {
@@ -13,7 +12,6 @@ class PortfolioDoc extends Document {
 				<body>
 					<Main />
 					<NextScript />
-					<Footer />
 				</body>
 			</Html>
 		)

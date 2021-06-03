@@ -17,14 +17,6 @@ const About = () => {
 				way to my Github will be here and I am excited to flesh out my
 				development portfolio with new and exciting projects.
 			</p>
-			<h3>Planned future projects</h3>
-			<ul>
-				<li>Microservices</li>
-				<li>Cloud computing</li>
-				<li>ML</li>
-				<li>Unreal Engine game development</li>
-				<li>Natural Language processing</li>
-			</ul>
 		</div>
 	)
 }

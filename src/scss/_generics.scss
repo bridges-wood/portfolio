@@ -1,5 +1,42 @@
+$color-text-primary: black;
+$color-text-secondary: #525252;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+h1 {
+	font-size: calc(1.375rem + 1.5vw);
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.container {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	align-content: center;
+	margin: 0;
+}
+
 .link {
-	color: black;
+	color: $color-text-primary;
 }
 
 .link:active {
@@ -7,5 +44,21 @@
 }
 
 .link:hover {
-	color: lighten(#000000, 30%);
+	color: lighten($color-text-primary, 30%);
+}
+
+.text-bold {
+	font-weight: 600;
+}
+
+.color-text-primary {
+	color: $color-text-primary;
+}
+
+.color-text-secondary {
+	color: $color-text-secondary;
+}
+
+.text-small {
+	font-size: 12px;
 }

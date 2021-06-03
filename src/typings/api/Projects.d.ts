@@ -14,14 +14,16 @@ export interface GithubProject {
 	languages: {
 		[name: string]: number
 	}
-	metadata: {
+	metadata?: {
 		repoImage: string
 		[propName: string]: any
 	}
 	id: number
 	name: string
+	private: boolean
 	description?: string
 	url: string
+	website_url?: string
 	size: number
 }
 
