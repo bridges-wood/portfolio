@@ -12,6 +12,8 @@ interface PageProps {
 	featured: any[]
 }
 
+// TODO change orientation page in landscape mode
+
 const Projects = ({ projects, featured }: PageProps) => {
 	return (
 		<div>
@@ -25,13 +27,7 @@ const Projects = ({ projects, featured }: PageProps) => {
 					<FeaturedProjectPreview key={project.title} project={project} />
 				))}
 				<hr />
-				<Slider
-					infinite={true}
-					dots={true}
-					slidesToShow={1}
-					slidesToScroll={1}
-					speed={500}
-				>
+				<Slider infinite slidesToShow={1} slidesToScroll={1} speed={500}>
 					{projects.map((project) => (
 						<Project key={project.id} project={project} />
 					))}

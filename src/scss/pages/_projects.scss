@@ -1,3 +1,7 @@
+$project-bg-light: #e0e0e0;
+$project-shadow-highlight-light: #ffffff;
+$project-shadow-lowlight-light: #bebebe;
+
 .projects {
 	display: grid;
 	justify-items: center;
@@ -12,12 +16,13 @@
 }
 
 .slick-slider {
-	width: clamp(200px, 400px, 100%);
+	width: clamp(200px, 500px, 90%);
 }
 
 .project {
-	background: #e0e0e0;
-	box-shadow: 4px 4px 12px #bebebe, -4px -4px 12px #ffffff;
+	background: $project-bg-light;
+	box-shadow: 4px 4px 12px $project-shadow-lowlight-light,
+		-4px -4px 12px $project-shadow-highlight-light;
 	border-radius: 10px;
 	margin: 1em;
 	padding: 0.5em;
@@ -37,4 +42,9 @@
 
 .languageBreakdown > li > span {
 	margin-right: 4px;
+}
+
+.featured-project-image-wrapper {
+	display: flex;
+	justify-content: center;
 }
