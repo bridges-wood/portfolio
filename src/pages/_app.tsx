@@ -1,9 +1,10 @@
 import Footer from '@components/Footer'
 import Navbar from '@components/Navbar'
+import { AppComponent } from 'next/dist/next-server/lib/router/router'
 import React from 'react'
 import '../scss/main.scss'
 
-function MyApp({ Component, pageProps }) {
+const App: AppComponent = ({ Component, pageProps }) => {
 	return (
 		<>
 			<aside>
@@ -17,4 +18,4 @@ function MyApp({ Component, pageProps }) {
 	)
 }
 
-export default MyApp
+export default App

@@ -1,5 +1,6 @@
 $color-text-primary: black;
 $color-text-secondary: #525252;
+$link-active: #007bff;
 
 h1,
 h2,
@@ -40,7 +41,7 @@ a {
 }
 
 .link:active {
-	color: #007bff;
+	color: $link-active;
 }
 
 .link:hover {

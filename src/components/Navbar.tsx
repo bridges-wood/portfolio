@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
+// TODO add color theme toggle.
 const Navbar = () => {
 	return (
 		<div className='navbar'>
