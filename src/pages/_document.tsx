@@ -9,7 +9,7 @@ class PortfolioDoc extends Document {
 				<Head>
 					<link rel='icon' href='/favicon.ico' />
 				</Head>
-				<body>
+				<body className='theme--default'>
 					<Main />
 					<NextScript />
 				</body>

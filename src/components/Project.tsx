@@ -21,7 +21,9 @@ const Project = ({ project }: ComponentProps) => {
 						<span className='color-text-secondary'>Private</span>
 					</span>
 				) : (
-					<a href={project.url}>{project.name}</a>
+					<a href={project.url} className='link'>
+						{project.name}
+					</a>
 				)}
 			</h5>
 			<span>{project.description}</span>

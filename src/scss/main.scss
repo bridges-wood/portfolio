@@ -1,4 +1,6 @@
 // @import 'bootstrap/dist/css/bootstrap.min.css';
+@import './themes';
+@import './colors';
 @import '~slick-carousel/slick/slick.css';
 @import '~slick-carousel/slick/slick-theme.css';
 @import './components/footer';
@@ -25,7 +27,9 @@ body,
 #__next {
 	min-height: 100vh;
 	min-width: 100vw;
-	background-color: #e0e0e0;
+	@include themed() {
+		background-color: t($bg);
+	}
 }
 
 *,

@@ -26,6 +26,19 @@
 	margin: 0 1ex 0 1ex;
 }
 
+$rays: 8;
+@for $i from 1 through $rays {
+	.ray-#{$i} {
+		width: 6px;
+		height: 2px;
+		position: absolute;
+		border-radius: 2px;
+		background: #424242;
+		transition: all 1s ease-in;
+		transform: rotate(#{45 * ($i - 1)}deg) translateX(14px);
+	}
+}
+
 @media (min-width: 768px) {
 	.brand {
 		position: absolute;

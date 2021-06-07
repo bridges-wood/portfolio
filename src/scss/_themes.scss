@@ -1,0 +1,51 @@
+@import './colors';
+
+$bg: 'bg';
+$color-text-primary: 'color-text-primary';
+$color-text-secondary: 'color-text-secondary';
+$link-active: 'link-active';
+$hover: 'hover';
+$project-shadow-highlight: 'project-shadow-highlight';
+$project-shadow-lowlight: 'project-shadow-lowlight';
+
+$themes: (
+	default: (
+		color-text-primary: $color-text-primary-light,
+		color-text-secondary: $color-text-secondary-light,
+		link-active: $link-active-light,
+		bg: $bg-light,
+		project-shadow-highlight: $project-shadow-highlight-light,
+		project-shadow-lowlight: $project-shadow-lowlight-light,
+	),
+	dark: (
+		color-text-primary: $color-text-primary-dark,
+		color-text-secondary: $color-text-secondary-dark,
+		link-active: $link-active-dark,
+		bg: $bg-dark,
+		project-shadow-highlight: $project-shadow-highlight-dark,
+		project-shadow-lowlight: $project-shadow-lowlight-dark,
+	),
+);
+
+@mixin themed() {
+	@each $theme, $map in $themes {
+		.theme--#{$theme} & {
+			$theme-map: () !global;
+			@each $key, $submap in $map {
+				$value: map-get(map-get($themes, $theme), '#{$key}');
+				$theme-map: map-merge(
+					$theme-map,
+					(
+						$key: $value,
+					)
+				) !global;
+			}
+			@content;
+			$theme-map: null !global;
+		}
+	}
+}
+
+@function t($key) {
+	@return map-get($theme-map, $key);
+}
