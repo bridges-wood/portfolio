@@ -1,6 +1,10 @@
 export interface FeaturedProject {
 	title: string
-	image: string
+	images: {
+		previewMobile: string
+		previewTablet: string
+		previewDesktop: string
+	}
 	description: string
 	url?: string
 }

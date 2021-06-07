@@ -1,5 +1,4 @@
 import { FeaturedProject } from '@typings/FeaturedProject'
-import Image from 'next/image'
 import React from 'react'
 
 interface ComponentProps {
@@ -10,15 +9,22 @@ const FeaturedProjectPreview = ({ project }: ComponentProps) => {
 	return (
 		<div className='project'>
 			<h3>{project.title}</h3>
-			<div className='featured-project-image-wrapper'>
-				<Image
-					src={project.image}
-					alt={`Screenshot of ${project.title}`}
-					width={600}
-					height={337.5}
-					priority
+
+			<picture className='featured-project-image-wrapper'>
+				<source
+					media='(max-width: 600px)'
+					srcSet={project.images.previewMobile}
 				/>
-			</div>
+				<source
+					media='(max-width: 800px)'
+					srcSet={project.images.previewTablet}
+				/>
+				<source
+					media='(min-width: 800px)'
+					srcSet={project.images.previewDesktop}
+				/>
+				<img src={project.images.previewDesktop} />
+			</picture>
 			<br />
 			<span>
 				When I approached Harry's Hot Tubs at the start of 2021, I thought that

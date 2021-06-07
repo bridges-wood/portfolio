@@ -10,8 +10,6 @@ const fetchProjects = async (): Promise<GithubProject[]> => {
 		visibility: 'all',
 		sort: 'updated',
 	})
-	console.table(repositories, ['id', 'name'])
-
 	const filtered = filterRepositories(repositories)
 	return await Promise.all(filtered.map(parseRepo))
 }

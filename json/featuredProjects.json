@@ -2,6 +2,10 @@
 	{
 		"title": "Harry's Hot Tubs Booking Site",
 		"url": "https://harryshottubs.com",
-		"image": "/images/harryshottubs.com_.png"
+		"images": {
+			"previewMobile": "/images/harryshottubs.com_(iPhone%20X).png",
+			"previewTablet": "/images/harryshottubs.com_(iPad).png",
+			"previewDesktop": "/images/harryshottubs.com_.png"
+		}
 	}
 ]
