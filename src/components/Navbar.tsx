@@ -1,3 +1,4 @@
+import ThemeToggle from '@components/ThemeToggle'
 import Link from 'next/link'
 import React from 'react'
 
@@ -22,6 +23,7 @@ const Navbar = () => {
 			<Link href='/contact' passHref>
 				<a className='link'>Contact</a>
 			</Link>
+			<ThemeToggle />
 		</div>
 	)
 }
