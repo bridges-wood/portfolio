@@ -7,15 +7,17 @@ $link-active: 'link-active';
 $hover: 'hover';
 $project-shadow-highlight: 'project-shadow-highlight';
 $project-shadow-lowlight: 'project-shadow-lowlight';
+$icon-primary: 'icon-primary';
 
 $themes: (
-	default: (
+	light: (
 		color-text-primary: $color-text-primary-light,
 		color-text-secondary: $color-text-secondary-light,
 		link-active: $link-active-light,
 		bg: $bg-light,
 		project-shadow-highlight: $project-shadow-highlight-light,
 		project-shadow-lowlight: $project-shadow-lowlight-light,
+		icon-primary: #24292e,
 	),
 	dark: (
 		color-text-primary: $color-text-primary-dark,
@@ -24,6 +26,7 @@ $themes: (
 		bg: $bg-dark,
 		project-shadow-highlight: $project-shadow-highlight-dark,
 		project-shadow-lowlight: $project-shadow-lowlight-dark,
+		icon-primary: #c9d1d9,
 	),
 );
 

@@ -1,10 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-type ThemeName = 'default' | 'dark'
+type ThemeName = 'light' | 'dark'
 
 const ThemeToggle = () => {
-	const themes: ThemeName[] = ['default', 'dark']
-	const [currentTheme, setCurrentTheme] = useState<ThemeName>('default')
+	const themes: ThemeName[] = ['light', 'dark']
+	const [currentTheme, setCurrentTheme] = useState<ThemeName>('light')
+
+	useEffect(() => {
+		const updateTheme = (e: MediaQueryListEvent) => {
+			const nextTheme: ThemeName = e.matches ? 'dark' : 'light'
+			setCurrentTheme(nextTheme)
+			document.body.className = `theme--${nextTheme}`
+		}
+
+		window
+			.matchMedia('(prefers-color-scheme: dark)')
+			.addEventListener('change', updateTheme)
+
+		return () =>
+			window
+				.matchMedia('(prefers-color-scheme: dark)')
+				.removeEventListener('change', updateTheme)
+	}, [])
 
 	const advanceTheme: React.MouseEventHandler = (
 		event: React.MouseEvent<HTMLElement>
