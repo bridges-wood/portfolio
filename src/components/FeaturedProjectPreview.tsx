@@ -7,7 +7,7 @@ interface ComponentProps {
 
 const FeaturedProjectPreview = ({ project }: ComponentProps) => {
 	return (
-		<div className='project'>
+		<div className='featured-project'>
 			<h3>{project.title}</h3>
 
 			<picture className='featured-project-image-wrapper'>

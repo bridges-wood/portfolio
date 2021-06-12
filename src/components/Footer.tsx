@@ -5,11 +5,11 @@ import LinkedInIcon from './icon/LinkedInIcon'
 
 const Footer = () => {
 	return (
-		<div className='footer'>
+		<footer className='footer'>
 			<GithubIcon />
 			<LinkedInIcon />
 			<GmailIcon />
-		</div>
+		</footer>
 	)
 }
 

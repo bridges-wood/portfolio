@@ -47,8 +47,8 @@ const Projects = ({ projects, featured }: PageProps) => {
 	}, [width])
 
 	return (
-		<div>
-			<h2>Projects</h2>
+		<div className='outer'>
+			<h1>Projects</h1>
 			<p>
 				A sample of some of the projects that I've worked on for personal
 				projects, assignments and on freelance.

@@ -1,28 +1,25 @@
+import NavLink from '@components/NavLink'
 import ThemeToggle from '@components/ThemeToggle'
-import Link from 'next/link'
 import React from 'react'
 
-// TODO add color theme toggle.
 const Navbar = () => {
 	return (
-		<div className='navbar'>
-			<Link href='/'>
+		<div className='navbar' id='navbar'>
+			<NavLink href='/' activeClassName='active'>
 				<img className='brand' src='/images/logo.png' alt='Max Wood' />
-			</Link>
-			<Link href='/projects' passHref>
-				<a className='link'>
-					<span>Projects</span>
-				</a>
-			</Link>
-			<Link href='/about' passHref>
+			</NavLink>
+			<NavLink href='/projects' activeClassName='active'>
+				<a className='link'>Projects</a>
+			</NavLink>
+			<NavLink href='/about' activeClassName='active'>
 				<a className='link'>About</a>
-			</Link>
-			<Link href='/posts' passHref>
+			</NavLink>
+			<NavLink href='/posts' activeClassName='active'>
 				<a className='link'>Blog</a>
-			</Link>
-			<Link href='/contact' passHref>
+			</NavLink>
+			<NavLink href='/contact' activeClassName='active'>
 				<a className='link'>Contact</a>
-			</Link>
+			</NavLink>
 			<ThemeToggle />
 		</div>
 	)

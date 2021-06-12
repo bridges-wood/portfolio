@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
+.contact {
+	width: 60%;
+	display: grid;
+	place-items: center;
+}
+
+.contact > span {
+	line-break: auto;
+}
+
+.email-address {
+	font-size: 16pt;
+	font-weight: lighter;
+}
+
+.border-wrapper {
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	width: 60%;
+	aspect-ratio: 1;
+	box-sizing: content-box;
+	position: relative;
+	padding: 1rem;
+	background: linear-gradient(45deg, #f0e335, #b517d1);
+	padding: 2px;
+}
+
+.info-wrapper {
+	display: grid;
+	place-items: center;
+	aspect-ratio: 1;
+	width: 100%;
+	border-radius: 50%;
+
+	@include themed() {
+		transition: background-color 0.5s ease-in;
+		background-color: t($bg);
+	}
+}
+
+.info-wrapper > address {
+	font-style: normal;
+	text-align: center;
+}
+
+address > hr {
+	width: 20%;
+	@include themed() {
+		transition: background-color 0.5s ease-in, border-color 0.5s ease-in;
+		border-color: t($icon-primary);
+		background-color: t($icon-primary);
+	}
+}
+
+.name {
+	font-size: 32pt;
+	font-weight: lighter;
+}
+
+.pad {
+	margin-top: 2em;
+}
+
+.signature {
+	font-family: 'Nothing You Could Do';
+	font-size: 16pt;
+}
