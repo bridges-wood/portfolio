@@ -1,4 +1,4 @@
-import { FrontMatter } from '@typings/frontMatter'
+import FrontMatter from '@typings/frontMatter'
 import { postFilePaths, POSTS_PATH } from '@utils/blog'
 import fs from 'fs'
 import matter from 'gray-matter'

@@ -6,14 +6,12 @@ const Contact = () => {
 			<div className='border-wrapper'>
 				<div className='info-wrapper'>
 					<address>
-						<span className='name'>Max Wood</span>
+						<div className='name'>Max Wood</div>
 						<hr />
 						<a className='link' href='mailto:bridges.wood@gmail.com'>
 							<span className='email-address'>bridges.wood@gmail.com</span>
 						</a>
-						<br />
-						<div className='pad' />
-						<span className='signature'>MW</span>
+						<div className='signature'>MW</div>
 					</address>
 				</div>
 			</div>

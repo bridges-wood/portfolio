@@ -17,6 +17,7 @@
 		"paths": {
 			"@components/*": ["components/*"],
 			"@hooks/*": ["hooks/*"],
+			"@pages/*": ["pages/*"],
 			"@typings/*": ["typings/*"],
 			"@utils/*": ["utils/*"],
 			"@json/*": ["../json/*.json"]

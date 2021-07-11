@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
 
 .contact {
-	width: 60%;
+	width: 100%;
 	display: grid;
 	place-items: center;
 }
@@ -16,10 +16,10 @@
 }
 
 .border-wrapper {
+	width: clamp(250px, 60%, 600px);
 	display: grid;
 	place-items: center;
 	border-radius: 50%;
-	width: 60%;
 	aspect-ratio: 1;
 	box-sizing: content-box;
 	position: relative;
@@ -58,13 +58,18 @@ address > hr {
 .name {
 	font-size: 32pt;
 	font-weight: lighter;
-}
-
-.pad {
-	margin-top: 2em;
+	@include themed() {
+		transition: color 0.5s ease-in;
+		color: t($color-text-primary);
+	}
 }
 
 .signature {
+	margin-top: 1.5em;
 	font-family: 'Nothing You Could Do';
 	font-size: 16pt;
+	@include themed() {
+		transition: color 0.5s ease-in;
+		color: t($color-text-primary);
+	}
 }

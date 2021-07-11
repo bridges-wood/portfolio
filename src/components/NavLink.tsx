@@ -1,8 +1,8 @@
-import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
 import React, { Children, ReactPortal } from 'react'
+import { NavLink as NavLinkBootstrap, NavLinkProps } from 'react-bootstrap'
 
-interface ComponentProps extends React.PropsWithChildren<LinkProps> {
+interface ComponentProps extends React.PropsWithChildren<NavLinkProps> {
 	activeClassName?: string
 }
 
@@ -19,11 +19,11 @@ const NavLink = ({ children, activeClassName, ...props }: ComponentProps) => {
 		: childClassName
 
 	return (
-		<Link {...props}>
+		<NavLinkBootstrap {...props}>
 			{React.cloneElement(child, {
 				className: className || null,
 			})}
-		</Link>
+		</NavLinkBootstrap>
 	)
 }
 

@@ -1,6 +1,6 @@
 @import './theme-toggle';
 
-.brand {
+.brand-image {
 	aspect-ratio: 13/9;
 	height: 50px;
 	margin-right: auto;
@@ -13,48 +13,107 @@
 .navbar {
 	padding: 0.5em;
 	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
 }
 
-.navbar > .link {
-	text-decoration: none;
-	display: grid;
-	align-content: center;
+.nav-link {
 	text-align: center;
-	text-overflow: ellipsis;
-	margin: 0 1ex 0 1ex;
+	margin-left: auto;
+	// margin-right: 0.5em;
 }
 
-.navbar > .link.active {
+.navbar-collapse {
+	flex-basis: auto;
+	flex-grow: 0;
+	margin-left: auto;
+	z-index: 2;
+}
+
+.navbar-nav > * {
+	width: 100%;
 	@include themed() {
-		color: t($link-active);
+		background-color: t($bg-low-contrast);
+		transition: all 0.5s ease-in !important;
+		transition-property: color, background-color;
 	}
 }
+
+.navbar-toggler {
+	width: 64px;
+}
+
+.toggle-container.nav-item {
+	margin-left: auto;
+	margin-right: 0;
+	width: auto !important;
+}
+
+.break {
+	flex-basis: 100%;
+	height: 0;
+}
+
+$navbar-border-radius: 0.25rem;
+
+.nav-item:last-child {
+	opacity: 1;
+	border-bottom-left-radius: $navbar-border-radius;
+	border-bottom-right-radius: $navbar-border-radius;
+}
+
+.nav-link:first-child {
+	border-top-left-radius: $navbar-border-radius;
+	border-top-right-radius: $navbar-border-radius;
+}
+
+.navbar-nav {
+	border-radius: $navbar-border-radius;
+}
+
+// .navbar > .link.active {
+// 	@include themed() {
+// 		color: t($link-active);
+// 	}
+// }
 
 @media (min-width: 768px) {
-	.brand {
-		position: absolute;
-		margin-right: 0;
-		top: 1em;
-		height: 50px;
-	}
-
-	.navbar {
-		flex-direction: column;
+	.navbar,
+	.navbar-nav {
+		flex-direction: column !important;
 		justify-content: center;
 		align-items: center;
 	}
 
-	.navbar .link {
-		margin-top: 1em;
+	.navbar-nav {
+		padding-bottom: 60px;
 	}
-}
 
-@media (max-width: 400px) {
-	.navbar {
-		flex-wrap: wrap;
+	.nav-link {
+		margin: 0;
+		text-align: center;
+	}
+
+	.navbar-brand {
+		margin: 0;
+	}
+
+	.break {
+		display: none;
+	}
+
+	.navbar-collapse {
+		flex-basis: 100%;
+		flex-grow: 1;
+		margin-left: 0;
+		z-index: 0;
+		border-color: transparent;
+	}
+
+	.navbar-nav > * {
+		background-color: transparent !important;
+	}
+
+	.toggle-container.nav-item {
+		position: absolute;
+		bottom: 1em;
 	}
 }

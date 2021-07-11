@@ -1,4 +1,4 @@
-// @import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
 @import './themes';
 @import './colors';
 @import '~slick-carousel/slick/slick.css';
@@ -7,6 +7,7 @@
 @import './components/languageBar';
 @import './components/navbar';
 @import './pages/contact';
+@import './pages/error';
 @import './pages/home';
 @import './pages/post';
 @import './pages/projects';
@@ -59,7 +60,7 @@ body::-webkit-scrollbar {
 
 .content {
 	display: grid;
-	padding: 20px 20px 40px 20px;
+	padding: 30px 20px 40px 20px;
 	justify-items: center;
 	// This line needs to be kep to keep react-slick happy.
 	grid-template-columns: minmax(0, 100%);
@@ -80,5 +81,9 @@ aside {
 	#__next {
 		grid-template-rows: 100%;
 		grid-template-columns: 6em calc(100% - 6em);
+	}
+
+	.content {
+		padding: 20px 20px 40px 20px;
 	}
 }

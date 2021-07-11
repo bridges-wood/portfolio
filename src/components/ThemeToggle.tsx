@@ -1,27 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import useStoredState from '../hooks/useStoredState'
 
 type ThemeName = 'light' | 'dark'
 
 const ThemeToggle = () => {
 	const themes: ThemeName[] = ['light', 'dark']
-	const [currentTheme, setCurrentTheme] = useState<ThemeName>('light')
+	const [currentTheme, setCurrentTheme] = useStoredState<ThemeName>({
+		fallback: undefined,
+		key: 'theme',
+		toString: JSON.stringify,
+		fromString: JSON.parse,
+	})
 
 	useEffect(() => {
-		const updateTheme = (e: MediaQueryListEvent) => {
-			const nextTheme: ThemeName = e.matches ? 'dark' : 'light'
-			setCurrentTheme(nextTheme)
-			document.body.className = `theme--${nextTheme}`
-		}
+		if (!currentTheme) {
+			const updateTheme = (e: MediaQueryListEvent) => {
+				const nextTheme: ThemeName = e.matches ? 'dark' : 'light'
+				setCurrentTheme(nextTheme)
+				document.body.className = `theme--${nextTheme}`
+			}
 
-		window
-			.matchMedia('(prefers-color-scheme: dark)')
-			.addEventListener('change', updateTheme)
-
-		return () =>
 			window
 				.matchMedia('(prefers-color-scheme: dark)')
-				.removeEventListener('change', updateTheme)
-	}, [])
+				.addEventListener('change', updateTheme)
+
+			return () =>
+				window
+					.matchMedia('(prefers-color-scheme: dark)')
+					.removeEventListener('change', updateTheme)
+		}
+	}, [currentTheme])
+
+	useEffect(() => {
+		document.body.className = `theme--${currentTheme}`
+	}, [currentTheme])
 
 	const advanceTheme: React.MouseEventHandler = (
 		event: React.MouseEvent<HTMLElement>
@@ -29,7 +41,6 @@ const ThemeToggle = () => {
 		event.preventDefault()
 		const nextTheme = themes[(themes.indexOf(currentTheme) + 1) % themes.length]
 		setCurrentTheme(nextTheme)
-		document.body.className = `theme--${nextTheme}`
 	}
 
 	return (

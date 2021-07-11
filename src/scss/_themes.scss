@@ -1,6 +1,7 @@
 @import './colors';
 
 $bg: 'bg';
+$bg-low-contrast: 'bg-lc';
 $color-text-primary: 'color-text-primary';
 $color-text-secondary: 'color-text-secondary';
 $link-active: 'link-active';
@@ -11,21 +12,23 @@ $icon-primary: 'icon-primary';
 
 $themes: (
 	light: (
-		color-text-primary: $color-text-primary-light,
-		color-text-secondary: $color-text-secondary-light,
-		link-active: $link-active-light,
-		bg: $bg-light,
-		project-shadow-highlight: $project-shadow-highlight-light,
-		project-shadow-lowlight: $project-shadow-lowlight-light,
+		color-text-primary: #000,
+		color-text-secondary: #525252,
+		link-active: #007bff,
+		bg: #e0e0e0,
+		bg-lc: #ddd,
+		project-shadow-highlight: #ffffff,
+		project-shadow-lowlight: #bebebe,
 		icon-primary: #24292e,
 	),
 	dark: (
-		color-text-primary: $color-text-primary-dark,
-		color-text-secondary: $color-text-secondary-dark,
-		link-active: $link-active-dark,
-		bg: $bg-dark,
-		project-shadow-highlight: $project-shadow-highlight-dark,
-		project-shadow-lowlight: $project-shadow-lowlight-dark,
+		color-text-primary: #fff,
+		color-text-secondary: #adadad,
+		link-active: #007bff,
+		bg: #1f1f1f,
+		bg-lc: #222,
+		project-shadow-highlight: #242424,
+		project-shadow-lowlight: #1a1a1a,
 		icon-primary: #c9d1d9,
 	),
 );

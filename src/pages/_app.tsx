@@ -5,6 +5,7 @@ import React from 'react'
 import '../scss/main.scss'
 
 const App: AppComponent = ({ Component, pageProps }) => {
+	// TODO avoid flashbang on rerender.
 	return (
 		<>
 			<aside>

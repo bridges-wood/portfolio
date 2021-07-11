@@ -1,27 +1,40 @@
-import NavLink from '@components/NavLink'
 import ThemeToggle from '@components/ThemeToggle'
 import React from 'react'
+import {
+	Nav,
+	Navbar as NavBarBootstrap,
+	NavbarBrand,
+	NavLink,
+} from 'react-bootstrap'
+import NavbarCollapse from 'react-bootstrap/NavbarCollapse'
+import NavbarToggle from 'react-bootstrap/NavbarToggle'
 
 const Navbar = () => {
 	return (
-		<div className='navbar' id='navbar'>
-			<NavLink href='/' activeClassName='active'>
-				<img className='brand' src='/images/logo.png' alt='Max Wood' />
-			</NavLink>
-			<NavLink href='/projects' activeClassName='active'>
-				<a className='link'>Projects</a>
-			</NavLink>
-			<NavLink href='/about' activeClassName='active'>
-				<a className='link'>About</a>
-			</NavLink>
-			<NavLink href='/posts' activeClassName='active'>
-				<a className='link'>Blog</a>
-			</NavLink>
-			<NavLink href='/contact' activeClassName='active'>
-				<a className='link'>Contact</a>
-			</NavLink>
-			<ThemeToggle />
-		</div>
+		<NavBarBootstrap expand='md'>
+			<NavbarBrand href='/'>
+				<img className='brand-image' src='/images/logo.png' alt='Max Wood' />
+			</NavbarBrand>
+			<NavbarToggle />
+			<div className='break' />
+			<NavbarCollapse>
+				<Nav>
+					<NavLink href='/projects' className='link'>
+						<span className='link'>Projects</span>
+					</NavLink>
+
+					<NavLink href='/posts'>
+						<span className='link'>Blog</span>
+					</NavLink>
+					<NavLink href='/contact'>
+						<span className='link'>Contact</span>
+					</NavLink>
+					<Nav.Item bsPrefix='toggle-container nav-item'>
+						<ThemeToggle />
+					</Nav.Item>
+				</Nav>
+			</NavbarCollapse>
+		</NavBarBootstrap>
 	)
 }
 
