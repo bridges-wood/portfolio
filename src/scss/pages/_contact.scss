@@ -47,7 +47,10 @@
 }
 
 address > hr {
-	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
+	opacity: 1;
 	@include themed() {
 		transition: background-color 0.5s ease-in, border-color 0.5s ease-in;
 		border-color: t($icon-primary);
