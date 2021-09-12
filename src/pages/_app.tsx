@@ -1,6 +1,6 @@
 import Footer from '@components/Footer'
 import Navbar from '@components/Navbar'
-import { AppComponent } from 'next/dist/next-server/lib/router/router'
+import { AppComponent } from 'next/dist/shared/lib/router/router'
 import React from 'react'
 import '../scss/main.scss'
 
