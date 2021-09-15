@@ -19,7 +19,6 @@
 		a {
 			padding-left: 3px;
 			@include themed() {
-				transition: 0.5s color ease-in;
 				color: t($color-text-secondary);
 			}
 		}

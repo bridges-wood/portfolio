@@ -25,7 +25,6 @@
 	padding: 0.5em;
 
 	@include themed() {
-		transition: background 0.5s ease-in, box-shadow 0.5s ease-in;
 		background: t($bg);
 		box-shadow: 4px 4px 12px t($project-shadow-lowlight),
 			-4px -4px 12px t($project-shadow-highlight);

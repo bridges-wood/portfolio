@@ -32,7 +32,16 @@ const ThemeToggle = () => {
 	}, [currentTheme])
 
 	useEffect(() => {
-		document.body.className = `theme--${currentTheme}`
+		function cleanUpTransition(this: HTMLElement, event: TransitionEvent) {
+			if (document.getElementById('__next') === event.target)
+				document.body.classList.remove('arriving')
+		}
+
+		document.body.addEventListener('transitionend', cleanUpTransition)
+		document.body.className = `theme--${currentTheme} arriving`
+
+		return () =>
+			document.body.removeEventListener('transitionend', cleanUpTransition)
 	}, [currentTheme])
 
 	const advanceTheme: React.MouseEventHandler = (

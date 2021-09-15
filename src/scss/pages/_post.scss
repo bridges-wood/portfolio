@@ -1,5 +1,5 @@
 .post {
-	width: 100%;
+	width: min(80ch, 100%);
 }
 
 .post-header h1 {
@@ -8,6 +8,34 @@
 
 .post-body {
 	margin-top: 1em;
+
+	a {
+		transition-property: color, text-decoration;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-in;
+
+		@include themed() {
+			text-decoration: underline !important;
+		}
+	}
+
+	a:hover {
+		transition-property: color, text-decoration;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-in;
+
+		@include themed() {
+			color: t($link-active);
+			text-decoration: underline solid t($link-active) !important;
+		}
+	}
+}
+
+.image-wrapper {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1em;
 }
 
 .latest-posts {
@@ -22,7 +50,6 @@
 
 	@include themed() {
 		color: t($color-text-primary);
-		transition: color 0.5s ease-in;
 	}
 }
 
@@ -51,7 +78,6 @@
 	padding-left: 4px;
 	@include themed() {
 		color: t($color-text-secondary);
-		transition: color 0.5s ease-in;
 	}
 }
 
@@ -66,7 +92,6 @@
 
 	@include themed() {
 		color: t($color-text-primary);
-		transition: color 0.5s ease-in;
 	}
 }
 

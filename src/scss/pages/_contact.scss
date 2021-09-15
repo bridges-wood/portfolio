@@ -36,7 +36,6 @@
 	border-radius: 50%;
 
 	@include themed() {
-		transition: background-color 0.5s ease-in;
 		background-color: t($bg);
 	}
 }
@@ -52,7 +51,6 @@ address > hr {
 	width: 40%;
 	opacity: 1;
 	@include themed() {
-		transition: background-color 0.5s ease-in, border-color 0.5s ease-in;
 		border-color: t($icon-primary);
 		background-color: t($icon-primary);
 	}
@@ -62,7 +60,6 @@ address > hr {
 	font-size: 32pt;
 	font-weight: lighter;
 	@include themed() {
-		transition: color 0.5s ease-in;
 		color: t($color-text-primary);
 	}
 }
@@ -72,7 +69,6 @@ address > hr {
 	font-family: 'Nothing You Could Do';
 	font-size: 16pt;
 	@include themed() {
-		transition: color 0.5s ease-in;
 		color: t($color-text-primary);
 	}
 }

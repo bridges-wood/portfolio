@@ -15,7 +15,7 @@ $themes: (
 		color-text-primary: #000,
 		color-text-secondary: #525252,
 		link-active: #007bff,
-		bg: #e0e0e0,
+		bg: #eaeaea,
 		bg-lc: #ddd,
 		project-shadow-highlight: #ffffff,
 		project-shadow-lowlight: #bebebe,
@@ -48,6 +48,10 @@ $themes: (
 			}
 			@content;
 			$theme-map: null !global;
+		}
+
+		.theme--#{$theme}.arriving & {
+			transition: all 0.5s;
 		}
 	}
 }
