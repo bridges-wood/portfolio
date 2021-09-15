@@ -6,6 +6,7 @@ import { GetStaticProps } from 'next'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import Head from 'next/head'
+import Image from 'next/image'
 import path from 'path'
 
 /**
@@ -14,6 +15,7 @@ import path from 'path'
 
 const components = {
 	Head,
+	Image,
 }
 
 interface PageProps {

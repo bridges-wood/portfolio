@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 
 	const published = hydratedPosts.filter((post) => post.isPublished)
 
-	const postsByDate = hydratedPosts.sort(
+	const postsByDate = published.sort(
 		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 	)
 
