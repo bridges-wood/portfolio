@@ -27,8 +27,8 @@ const FeaturedProjectPreview = ({ project }: ComponentProps) => {
 			</picture>
 			<br />
 			<span>
-				When I approached Harry's Hot Tubs at the start of 2021, I thought that
-				the project would just be a simple booking system with a Stripe
+				When I approached Harry&apos;s Hot Tubs at the start of 2021, I thought
+				that the project would just be a simple booking system with a Stripe
 				integration. However, after the project reached that state, the goals of
 				the client expanded and now, in its current state, the site has accounts
 				for delivery drivers and managers to keep track of bookings across the

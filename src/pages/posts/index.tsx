@@ -20,7 +20,7 @@ interface PageProps {
 	posts: BlogPost[]
 }
 
-const index = ({ featured, posts }: PageProps) => {
+const Index = ({ featured, posts }: PageProps) => {
 	const [displayed, setDisplayed] = useState(10)
 
 	return (
@@ -71,4 +71,4 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 	}
 }
 
-export default index
+export default Index

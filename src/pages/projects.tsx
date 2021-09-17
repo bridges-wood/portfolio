@@ -54,7 +54,7 @@ const Projects = ({ projects, featured }: PageProps) => {
 			</Head>
 			<h1>Projects</h1>
 			<p>
-				A sample of some of the projects that I've worked on for personal
+				A sample of some of the projects that I&apos;ve worked on for personal
 				projects, assignments and on freelance.
 			</p>
 			<div className='projects' id='container'>

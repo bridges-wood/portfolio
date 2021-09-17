@@ -9,8 +9,8 @@ const Acknowledgements = () => {
 			</Head>
 			<h1>Acknowledgements</h1>
 			<div>
-				I'd like to acknowledge the following for their contributions to this
-				site.
+				I&apos;d like to acknowledge the following for their contributions to
+				this site.
 			</div>
 			<ul>
 				<li>

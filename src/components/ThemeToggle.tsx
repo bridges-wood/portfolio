@@ -29,7 +29,7 @@ const ThemeToggle = () => {
 					.matchMedia('(prefers-color-scheme: dark)')
 					.removeEventListener('change', updateTheme)
 		}
-	}, [currentTheme])
+	}, [currentTheme, setCurrentTheme])
 
 	useEffect(() => {
 		function cleanUpTransition(this: HTMLElement, event: TransitionEvent) {
