@@ -1,8 +1,12 @@
+import Head from 'next/head'
 import React from 'react'
 
 const Contact = () => {
 	return (
 		<div className='contact'>
+			<Head>
+				<title>Contact | Max Wood</title>
+			</Head>
 			<div className='border-wrapper'>
 				<div className='info-wrapper'>
 					<address>

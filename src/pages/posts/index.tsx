@@ -5,6 +5,7 @@ import { postFilePaths, POSTS_PATH } from '@utils/blog'
 import fs from 'fs'
 import matter from 'gray-matter'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import path from 'path'
 import React, { useState } from 'react'
 
@@ -24,6 +25,9 @@ const index = ({ featured, posts }: PageProps) => {
 
 	return (
 		<div className='container'>
+			<Head>
+				<title>Blog | Max Wood</title>
+			</Head>
 			{featured ? <FeaturedBlogpost {...featured} /> : null}
 			<div className='latest-posts'>
 				<h1>Latest Posts</h1>

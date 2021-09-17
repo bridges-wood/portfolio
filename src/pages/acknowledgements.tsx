@@ -1,8 +1,12 @@
+import Head from 'next/head'
 import React from 'react'
 
 const Acknowledgements = () => {
 	return (
 		<div>
+			<Head>
+				<title>Acknowledgements | Max Wood</title>
+			</Head>
 			<h1>Acknowledgements</h1>
 			<div>
 				I'd like to acknowledge the following for their contributions to this

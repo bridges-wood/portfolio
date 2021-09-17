@@ -5,6 +5,7 @@ import featuredProjects from '@json/featuredProjects'
 import { GithubProject } from '@typings/api/Projects'
 import fetchProjects from '@utils/repos'
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import React, { useEffect, useRef, useState } from 'react'
 import Slider, { Settings as SliderProps } from 'react-slick'
 
@@ -48,6 +49,9 @@ const Projects = ({ projects, featured }: PageProps) => {
 
 	return (
 		<div className='outer'>
+			<Head>
+				<title>Projects | Max Wood</title>
+			</Head>
 			<h1>Projects</h1>
 			<p>
 				A sample of some of the projects that I've worked on for personal

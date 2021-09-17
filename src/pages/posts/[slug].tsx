@@ -32,6 +32,12 @@ interface PageProps {
 
 const PostPage = ({ source, frontMatter }: PageProps) => (
 	<div className='post'>
+		<Head>
+			<title>{frontMatter.title} | Max Wood</title>
+
+			<meta name='author' content='Max Wood' />
+			<meta property='og:title' content={frontMatter.title} />
+		</Head>
 		<div className='post-header'>
 			<h1>{frontMatter.title}</h1>
 			<small>
