@@ -3,9 +3,9 @@
 		"title": "Harry's Hot Tubs Booking Site",
 		"url": "https://harryshottubs.com",
 		"images": {
-			"previewMobile": "/images/harryshottubs.com_(iPhone%20X).png",
-			"previewTablet": "/images/harryshottubs.com_(iPad).png",
-			"previewDesktop": "/images/harryshottubs.com_.png"
+			"previewMobile": "/images/harrys-hot-tubs/harryshottubs.com_(iPhone%20X).png",
+			"previewTablet": "/images/harrys-hot-tubs/harryshottubs.com_(iPad).png",
+			"previewDesktop": "/images/harrys-hot-tubs/harryshottubs.com_.png"
 		}
 	}
 ]

@@ -1,3 +1,4 @@
+import AnchoredHeading from '@components/AnchoredHeading'
 import FrontMatter from '@typings/frontMatter'
 import { postFilePaths, POSTS_PATH } from '@utils/blog'
 import fs from 'fs'
@@ -13,9 +14,15 @@ import path from 'path'
  * Borrowed from: https://github.com/vercel/next.js/blob/canary/examples/with-mdx-remote/pages/posts/%5Bslug%5D.js
  */
 
-const components = {
+const components: Record<string, React.ReactNode> = {
 	Head,
 	Image,
+	h1: (props: any) => <AnchoredHeading {...{ level: 1, ...props }} />,
+	h2: (props: any) => <AnchoredHeading {...{ level: 2, ...props }} />,
+	h3: (props: any) => <AnchoredHeading {...{ level: 3, ...props }} />,
+	h4: (props: any) => <AnchoredHeading {...{ level: 4, ...props }} />,
+	h5: (props: any) => <AnchoredHeading {...{ level: 5, ...props }} />,
+	h6: (props: any) => <AnchoredHeading {...{ level: 6, ...props }} />,
 }
 
 interface PageProps {

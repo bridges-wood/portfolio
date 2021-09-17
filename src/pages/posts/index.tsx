@@ -8,7 +8,7 @@ import { GetStaticProps } from 'next'
 import path from 'path'
 import React, { useState } from 'react'
 
-const FEATURED = 'first-post'
+const FEATURED = 'harrys-hot-tubs'
 
 export interface BlogPost extends FrontMatter {
 	address: string

@@ -1,11 +1,16 @@
 ---
 title: Harry's Hot Tubs
-isPublished: false
+isPublished: true
 date: '2021-09-15'
 ---
 
 <div className='image-wrapper'>
-	<Image src='/images/harryshottubs.com_ (1).png' width='400' height='225' />
+	<Image
+		src='/images/harrys-hot-tubs/harryshottubs.com_ (1).png'
+		width='1920'
+		height='1080'
+		priority='true'
+	/>
 </div>
 
 As my very first freelance web development project, I created a website for a local
@@ -13,5 +18,66 @@ hot tub company. Built using [Next.js](https://nextjs.org/), [React](https://rea
 and [Sass](https://sass-lang.com/), it manages the whole hot tub booking process
 for customers as well as the buisness, with a dashboard for delivery drivers and
 managers that allow them to track the status and availability of all their hot tubs.
+
+I've learned a lot from this project, and I hope you'll find it some of what I have to share useful.
+
+## Table of Contents
+
+1. [About the Project](#about-the-project)
+2. [Architecture](#architecture)
+3. [Technologies Used](#technologies-used)
+4. [Deployment](#deployment)
+
+## About the Project
+
+The client wanted something built extremely fast, so I got stuck into programming the site without the usual design review process that I usually go through. Looking at the first live version of the site, I think it shows; it's not very pretty, but it works.
+
+<div className='image-wrapper'>
+	<Image
+		src='/images/harrys-hot-tubs/harryshottubs.com (ISO).png'
+		width='1920'
+		height='1440'
+	/>
+</div>
+
+Following this first version, most of the immediate work was focused on creating a comprehensive visual testing suite (using [Cypress](https://www.cypress.io/)) in addition to another suite of unit tests (using [Jest](https://jestjs.io/)) to catch any regressions in future work and make sure that the exisiting code was in line with the specification that the I had developed with the client to measure deliverables against.
+
+Following on from there, I built out an authentication system for managers and delivery drivers, and dashboards for both to manage all the information neccessary for their rolls.
+
+After that was delivered, I started work on the next feature: full on-site payments for bookings, removing the need for the customer to be redirected to [Stripe's](https://stripe.com) payment portal.
+
+Most recently, I was asked to redevelop the look and feel of the site, so I have been working on that for the past month. This was the most challenging part of the project, since I had to learn a lot about the design process and how to work with the client's brand. This was on top of the additional SEO and refactoring that was involved, in order to improve the user experience and increase page views. Given the challenging nature of this part of the project, I am hugely proud of how the results turned out, and the client is too.
+
+## Architecture
+
+The site is very simple, reflecting the needs of the client's business. The frontend and backend are both built using Next.js, leveraging [API Routes](https://nextjs.org/docs/api-routes/introduction) to bundle the whole application together within the same framework.
+
+By using the one framework, a great deal of the heavy lifting in terms of bundling, routing, and server-side rendering is taken care of, meaing that the site is blazing fast to load, and the code is very easy to read.
+
+The backend is RESTful, and mostly handles interfacing with the database.
+
+## Technologies Used
+
+So far I've mentioned most of the technologies I used in this project, but I want to go over the ones that I feel are important to mention:
+
+### Frontend
+
+- [Next.js](https://nextjs.org/) - The go-to framework for SSR in the React ecosystem. The decision to use it is an absolute no-brainer at this point.
+- [React](https://reactjs.org/) - My personal favourite JS framework, and the one that I use for all my projects.
+- [Sass](https://sass-lang.com/) - All-powerful CSS preprocessing language.
+- [Cypress](https://www.cypress.io/) - An excellent, extensible visual testing solution for any frontend project.
+
+### Backend
+
+- [Jest](https://jestjs.io/) - For unit testing (obviously).
+- [TypeScript](https://www.typescriptlang.org/) - Type checking has saved me more times that I can count at this point, and it's been a huge help in navigating the jungle that is JavaScript.
+- [Knex](http://knexjs.org/) - A simple ORM that makes queries scalable and highly readable.
+- [PostgreSQL](https://www.postgresql.org/) - Just the best DBMS right now (don't @ me), and with [pgAdmin](https://www.pgadmin.org/), it's even easier to manage, allowing even those without technical experience to view and edit the database.
+
+## Deployment
+
+By choosing Next.js, deployment options were pretty open. In the end, the ease of use provided by [Vercel](https://vercel.com/) ended up being the best option for the client. The database is hosted on [AWS](https://aws.amazon.com/), on a db.t2.micro instance.
+
+---
 
 Check it out [here](https://harryshottubs.com).

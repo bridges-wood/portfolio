@@ -22,12 +22,14 @@ const Navbar = () => {
 					<NavLink href='/projects' className='link'>
 						<span className='link'>Projects</span>
 					</NavLink>
-
 					<NavLink href='/posts'>
 						<span className='link'>Blog</span>
 					</NavLink>
 					<NavLink href='/contact'>
 						<span className='link'>Contact</span>
+					</NavLink>
+					<NavLink href='/acknowledgements'>
+						<span className='link'>Acknowledgements</span>
 					</NavLink>
 					<Nav.Item bsPrefix='toggle-container nav-item'>
 						<ThemeToggle />
