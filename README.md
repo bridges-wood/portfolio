@@ -1,6 +1,6 @@
 # Portfolio Website
 
-A website for me to showcase my work to world and blog about my interests.
+A website for me to showcase my work to the world and blog about my interests.
 
 ## Color Reference
 
