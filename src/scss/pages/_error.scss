@@ -18,9 +18,7 @@
 
 		a {
 			padding-left: 3px;
-			@include themed() {
-				color: t($color-text-secondary);
-			}
+			
 		}
 
 		a:hover {

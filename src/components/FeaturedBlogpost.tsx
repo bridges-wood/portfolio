@@ -1,5 +1,4 @@
 import { BlogPost } from '@pages/posts'
-import React from 'react'
 
 interface ComponentProps extends BlogPost {}
 

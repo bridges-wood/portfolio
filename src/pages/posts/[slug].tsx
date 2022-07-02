@@ -1,4 +1,5 @@
 import AnchoredHeading from '@components/AnchoredHeading'
+import { Image, Link, Text } from '@nextui-org/react'
 import FrontMatter from '@typings/frontMatter'
 import { postFilePaths, POSTS_PATH } from '@utils/blog'
 import fs from 'fs'
@@ -7,13 +8,12 @@ import { GetStaticProps } from 'next'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import Head from 'next/head'
-import Image from 'next/image'
 import path from 'path'
+import React from 'react'
 
 /**
  * Borrowed from: https://github.com/vercel/next.js/blob/canary/examples/with-mdx-remote/pages/posts/%5Bslug%5D.js
  */
-
 const components: Record<string, React.ReactNode> = {
 	Head,
 	Image,
@@ -23,6 +23,8 @@ const components: Record<string, React.ReactNode> = {
 	h4: (props: any) => <AnchoredHeading {...{ level: 4, ...props }} />,
 	h5: (props: any) => <AnchoredHeading {...{ level: 5, ...props }} />,
 	h6: (props: any) => <AnchoredHeading {...{ level: 6, ...props }} />,
+	p: Text,
+	a: Link,
 }
 
 interface PageProps {
@@ -39,10 +41,10 @@ const PostPage = ({ source, frontMatter }: PageProps) => (
 			<meta property='og:title' content={frontMatter.title} />
 		</Head>
 		<div className='post-header'>
-			<h1>{frontMatter.title}</h1>
-			<small>
+			<Text h1>{frontMatter.title}</Text>
+			<Text small>
 				Published on {new Date(frontMatter.date).toLocaleDateString()}
-			</small>
+			</Text>
 			{frontMatter.description && (
 				<p className='description'>{frontMatter.description}</p>
 			)}

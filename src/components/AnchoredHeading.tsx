@@ -1,4 +1,5 @@
 import LinkSolid from '@components/svg/link-solid.svg'
+import Text from '@nextui-org/react/text'
 import React from 'react'
 
 export interface ComponentProps {
@@ -26,66 +27,66 @@ const AnchoredHeading = ({ level, children }) => {
 	switch (level) {
 		case 1:
 			return (
-				<h1 id={anchor}>
+				<Text h1 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h1>
+				</Text>
 			)
 		case 2:
 			return (
-				<h2 id={anchor}>
+				<Text h2 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h2>
+				</Text>
 			)
 		case 3:
 			return (
-				<h3 id={anchor}>
+				<Text h3 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h3>
+				</Text>
 			)
 		case 4:
 			return (
-				<h4 id={anchor}>
+				<Text h4 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h4>
+				</Text>
 			)
 		case 5:
 			return (
-				<h5 id={anchor}>
+				<Text h5 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h5>
+				</Text>
 			)
 		case 6:
 			return (
-				<h6 id={anchor}>
+				<Text h6 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h6>
+				</Text>
 			)
 		default:
 			return (
-				<h1 id={anchor}>
+				<Text h1 id={anchor}>
 					<a href={link} className='anchor-link'>
 						{LinkSolid()}
 					</a>
 					{children}
-				</h1>
+				</Text>
 			)
 	}
 }

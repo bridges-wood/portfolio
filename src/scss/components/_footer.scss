@@ -13,9 +13,22 @@ footer {
 	height: 20px;
 	width: 20px;
 	margin: 5px 5px 5px 5px;
-	@include themed() {
-		fill: t($icon-primary);
-	}
+}
+
+.github.light {
+	fill: #181717;
+}
+
+.github.dark {
+	fill: #e6e6e6;
+}
+
+.linkedin {
+	fill: #0a66c2;
+}
+
+.gmail {
+	fill: #ea4335;
 }
 
 @media (min-width: 768px) {

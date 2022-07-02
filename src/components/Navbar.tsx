@@ -1,42 +1,33 @@
 import ThemeToggle from '@components/ThemeToggle'
-import React from 'react'
-import {
-	Nav,
-	Navbar as NavBarBootstrap,
-	NavbarBrand,
-	NavLink,
-} from 'react-bootstrap'
-import NavbarCollapse from 'react-bootstrap/NavbarCollapse'
-import NavbarToggle from 'react-bootstrap/NavbarToggle'
+import { Link } from '@nextui-org/react'
 
 const Navbar = () => {
 	return (
-		<NavBarBootstrap expand='md'>
-			<NavbarBrand href='/'>
+		<div>
+			<Link href='/'>
 				<img className='brand-image' src='/images/logo.png' alt='Max Wood' />
-			</NavbarBrand>
-			<NavbarToggle />
+			</Link>
+			<div />
 			<div className='break' />
-			<NavbarCollapse>
-				<Nav>
-					<NavLink href='/projects' className='link'>
-						<span className='link'>Projects</span>
-					</NavLink>
-					<NavLink href='/posts'>
-						<span className='link'>Blog</span>
-					</NavLink>
-					<NavLink href='/contact'>
-						<span className='link'>Contact</span>
-					</NavLink>
-					<NavLink href='/acknowledgements'>
-						<span className='link'>Acknowledgements</span>
-					</NavLink>
-					<Nav.Item bsPrefix='toggle-container nav-item'>
-						<ThemeToggle />
-					</Nav.Item>
-				</Nav>
-			</NavbarCollapse>
-		</NavBarBootstrap>
+			<div>
+				<div>
+					<Link href='/projects'>
+						<span className='Link'>Projects</span>
+					</Link>
+					<Link href='/posts'>
+						<span className='Link'>Blog</span>
+					</Link>
+					<Link href='/contact'>
+						<span className='Link'>Contact</span>
+					</Link>
+					<Link href='/acknowledgements'>
+						<span className='Link'>Acknowledgements</span>
+					</Link>
+
+					<ThemeToggle />
+				</div>
+			</div>
+		</div>
 	)
 }
 

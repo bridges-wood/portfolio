@@ -1,9 +1,12 @@
+import { Link } from '@nextui-org/react'
 import { useRouter } from 'next/router'
 import React, { Children, ReactPortal } from 'react'
-import { NavLink as NavLinkBootstrap, NavLinkProps } from 'react-bootstrap'
 
-interface ComponentProps extends React.PropsWithChildren<NavLinkProps> {
+interface ComponentProps {
 	activeClassName?: string
+	href?: string
+	as?: string
+	children: JSX.Element
 }
 
 const NavLink = ({ children, activeClassName, ...props }: ComponentProps) => {
@@ -19,11 +22,11 @@ const NavLink = ({ children, activeClassName, ...props }: ComponentProps) => {
 		: childClassName
 
 	return (
-		<NavLinkBootstrap {...props}>
+		<Link>
 			{React.cloneElement(child, {
 				className: className || null,
 			})}
-		</NavLinkBootstrap>
+		</Link>
 	)
 }
 

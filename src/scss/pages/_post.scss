@@ -32,9 +32,6 @@
 		transition-duration: 0.3s;
 		transition-timing-function: ease-in;
 
-		@include themed() {
-			text-decoration: underline !important;
-		}
 	}
 
 	@for $i from 1 through 6 {
@@ -52,10 +49,6 @@
 		transition-duration: 0.3s;
 		transition-timing-function: ease-in;
 
-		@include themed() {
-			color: t($link-active);
-			text-decoration: underline solid t($link-active) !important;
-		}
 	}
 }
 
@@ -76,9 +69,6 @@
 	padding-top: 0.5rem;
 	padding-left: 1rem;
 
-	@include themed() {
-		color: t($color-text-primary);
-	}
 }
 
 .featured-post {
@@ -104,9 +94,7 @@
 
 .featured-post-date {
 	padding-left: 4px;
-	@include themed() {
-		color: t($color-text-secondary);
-	}
+	
 }
 
 .featured-post > :not(.featured-post-bg) {
@@ -118,9 +106,7 @@
 	font-size: 72px;
 	font-weight: 700;
 
-	@include themed() {
-		color: t($color-text-primary);
-	}
+	
 }
 
 @media (min-width: 768px) {

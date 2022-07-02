@@ -24,11 +24,7 @@
 	margin: 1em;
 	padding: 0.5em;
 
-	@include themed() {
-		background: t($bg);
-		box-shadow: 4px 4px 12px t($project-shadow-lowlight),
-			-4px -4px 12px t($project-shadow-highlight);
-	}
+	
 }
 
 .languageBreakdown {

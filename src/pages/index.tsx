@@ -1,5 +1,5 @@
 import GradientRect, { Gradient } from '@components/GradientRect'
-import React from 'react'
+import { Container, Row, styled, Text } from '@nextui-org/react'
 
 const BlueToGreen: Gradient = {
 	start: '#42ddf5',
@@ -21,42 +21,55 @@ const PurpleToRed = {
 	end: '#e31717',
 }
 
+const PaddedRow = styled(Row, {
+	padding: '0.2em 0 0.2em 0',
+})
+
 export default function Home() {
 	return (
-		<div className='container'>
-			<div className='bio'>
-				<div>
-					<GradientRect {...{ ...BlueToGreen, length: 90 }} />
-					<GradientRect {...{ ...YellowToOrange, length: 50 }} />
-					<GradientRect {...{ ...Grey, length: 12 }} />
-				</div>
-				<div>
-					<GradientRect {...{ ...PurpleToRed, length: 100 }} />
-				</div>
-				<div>
-					<GradientRect {...{ ...YellowToOrange, length: 40 }} />
-					<GradientRect {...{ ...Grey, length: 12 }} />
-					<GradientRect {...{ ...Grey, length: 30 }} />
-					<GradientRect {...{ ...YellowToOrange, length: 70 }} />
-				</div>
-				<div>
-					<h1>Max Wood</h1>
-					<p>Student and freelance web-developer.</p>
-				</div>
-				<div>
-					<GradientRect {...{ ...Grey, length: 100 }} />
-					<GradientRect {...{ ...BlueToGreen, length: 50 }} />
-				</div>
-				<div>
-					<GradientRect {...{ ...BlueToGreen, length: 60 }} />
-					<GradientRect {...{ ...YellowToOrange, length: 35 }} />
-					<GradientRect {...{ ...BlueToGreen, length: 150 }} />
-				</div>
-				<div />
-				<div>
-					<GradientRect {...{ ...PurpleToRed, length: 70 }} />
-				</div>
-			</div>
-		</div>
+		<Container
+			css={{
+				marginRight: 'auto',
+				height: 'min-content',
+			}}
+		>
+			<PaddedRow>
+				<GradientRect {...{ ...BlueToGreen, length: 90 }} />
+				<GradientRect {...{ ...YellowToOrange, length: 50 }} />
+				<GradientRect {...{ ...Grey, length: 12 }} />
+			</PaddedRow>
+			<PaddedRow>
+				<GradientRect {...{ ...PurpleToRed, length: 100 }} />
+			</PaddedRow>
+			<PaddedRow>
+				<GradientRect {...{ ...YellowToOrange, length: 40 }} />
+				<GradientRect {...{ ...Grey, length: 12 }} />
+				<GradientRect {...{ ...Grey, length: 30 }} />
+				<GradientRect {...{ ...YellowToOrange, length: 70 }} />
+			</PaddedRow>
+			<Container
+				css={{
+					paddingLeft: '0',
+					marginLeft: '-0.02em',
+					paddingRight: '0',
+				}}
+			>
+				<Text h1>Max Wood</Text>
+				<Text>Student and freelance web-developer.</Text>
+			</Container>
+			<PaddedRow>
+				<GradientRect {...{ ...Grey, length: 100 }} />
+				<GradientRect {...{ ...BlueToGreen, length: 50 }} />
+			</PaddedRow>
+			<PaddedRow>
+				<GradientRect {...{ ...BlueToGreen, length: 60 }} />
+				<GradientRect {...{ ...YellowToOrange, length: 35 }} />
+				<GradientRect {...{ ...BlueToGreen, length: 150 }} />
+			</PaddedRow>
+			<PaddedRow />
+			<PaddedRow>
+				<GradientRect {...{ ...PurpleToRed, length: 70 }} />
+			</PaddedRow>
+		</Container>
 	)
 }
