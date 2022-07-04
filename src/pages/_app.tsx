@@ -1,5 +1,5 @@
-import Footer from '@components/Footer'
-import Navbar from '@components/Navbar'
+import Footer from '@layouts/Footer'
+import Navbar from '@layouts/Navbar'
 import { createTheme, NextUIProvider } from '@nextui-org/react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { AppComponent } from 'next/dist/shared/lib/router/router'

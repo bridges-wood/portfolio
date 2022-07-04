@@ -1,8 +1,13 @@
-import { BlogPost } from '@pages/posts'
+import type { BlogPost } from '@pages/posts'
+import { FC } from 'react'
 
-interface ComponentProps extends BlogPost {}
+type FeaturedBlogpostProps = BlogPost
 
-const FeaturedBlogpost = ({ title, address, date }: ComponentProps) => {
+const FeaturedBlogpost: FC<FeaturedBlogpostProps> = ({
+	title,
+	address,
+	date,
+}) => {
 	return (
 		<div className='featured-post'>
 			<img

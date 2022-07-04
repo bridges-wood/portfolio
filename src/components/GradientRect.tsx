@@ -1,13 +1,12 @@
-import React, { CSSProperties } from 'react'
+import { CSSProperties, FC } from 'react'
 
-export interface Gradient {
+export interface GradientRectProps {
 	start: string
 	end: string
 	length?: number
 }
 
-const GradientRect = (params: Gradient) => {
-	const { start, end, length } = params
+const GradientRect: FC<GradientRectProps> = ({ start, end, length = 100 }) => {
 	const height: number = 12
 	const style: CSSProperties = {
 		height: `${height}px`,

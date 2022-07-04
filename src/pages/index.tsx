@@ -1,17 +1,17 @@
-import GradientRect, { Gradient } from '@components/GradientRect'
+import GradientRect, { GradientRectProps } from '@components/GradientRect'
 import { Container, Row, styled, Text } from '@nextui-org/react'
 
-const BlueToGreen: Gradient = {
+const BlueToGreen: GradientRectProps = {
 	start: '#42ddf5',
 	end: '#12e652',
 }
 
-const YellowToOrange: Gradient = {
+const YellowToOrange: GradientRectProps = {
 	start: '#f0e335',
 	end: '#e68a22',
 }
 
-const Grey: Gradient = {
+const Grey: GradientRectProps = {
 	start: '#555555',
 	end: '#555555',
 }

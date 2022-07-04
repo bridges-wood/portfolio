@@ -1,11 +1,13 @@
-import { FeaturedProject } from '@typings/FeaturedProject'
-import React from 'react'
+import type { FeaturedProject } from '@typings/FeaturedProject'
+import { FC } from 'react'
 
-interface ComponentProps {
+interface FeaturedProjectPreviewProps {
 	project: FeaturedProject
 }
 
-const FeaturedProjectPreview = ({ project }: ComponentProps) => {
+const FeaturedProjectPreview: FC<FeaturedProjectPreviewProps> = ({
+	project,
+}) => {
 	return (
 		<div className='featured-project'>
 			<h3>{project.title}</h3>

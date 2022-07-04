@@ -1,13 +1,13 @@
 import LanguageBar from '@components/LanguageBar'
 import colors from '@json/colors'
-import { GithubProject } from '@typings/api/Projects'
-import React from 'react'
+import type { GithubProject } from '@typings/api/Projects'
+import { FC } from 'react'
 
-interface ComponentProps {
+interface ProjectProps {
 	project: GithubProject
 }
 
-const Project = ({ project }: ComponentProps) => {
+const Project: FC<ProjectProps> = ({ project }) => {
 	const totalBytes = Object.values(project.languages).reduce(
 		(total, bytes) => (total += bytes)
 	)

@@ -1,8 +1,8 @@
-import LinkSolid from '@components/svg/link-solid.svg'
-import Text from '@nextui-org/react/text'
-import React from 'react'
+import { Link } from '@components/icons'
+import { Text } from '@nextui-org/react'
+import React, { FC } from 'react'
 
-export interface ComponentProps {
+export interface AnchoredHeadingProps {
 	level: number
 	children?: React.ReactNode
 }
@@ -20,8 +20,12 @@ const getAnchor = (text: string) => {
 		.replace(/[ ]/g, '-')
 }
 
-const AnchoredHeading = ({ level, children }) => {
-	const anchor = getAnchor(children)
+const AnchoredHeading: FC<AnchoredHeadingProps> = ({ level, children }) => {
+	if (typeof children !== 'string') {
+		throw new Error('AnchoredHeading expects a string child')
+	}
+
+	const anchor = getAnchor(children as string)
 	const link = `#${anchor}`
 
 	switch (level) {
@@ -29,7 +33,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h1 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>
@@ -38,7 +42,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h2 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>
@@ -47,7 +51,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h3 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>
@@ -56,7 +60,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h4 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>
@@ -65,7 +69,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h5 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>
@@ -74,7 +78,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h6 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>
@@ -83,7 +87,7 @@ const AnchoredHeading = ({ level, children }) => {
 			return (
 				<Text h1 id={anchor}>
 					<a href={link} className='anchor-link'>
-						{LinkSolid()}
+						<Link />
 					</a>
 					{children}
 				</Text>

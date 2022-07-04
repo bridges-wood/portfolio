@@ -1,10 +1,10 @@
 import colors from '@json/colors'
-import { GithubProject } from '@typings/api/Projects'
-import React from 'react'
+import type { GithubProject } from '@typings/api/Projects'
+import { FC } from 'react'
 
-interface ComponentProps extends Pick<GithubProject, 'languages'> {}
+type LanguageBarProps = Pick<GithubProject, 'languages'>
 
-const LanguageBar = ({ languages }: ComponentProps) => {
+const LanguageBar: FC<LanguageBarProps> = ({ languages }) => {
 	const totalBytes = Object.values(languages).reduce(
 		(total, bytes) => (total += bytes)
 	)
