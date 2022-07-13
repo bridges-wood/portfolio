@@ -1,14 +1,11 @@
-import Footer from '@layouts/Footer'
-import Navbar from '@layouts/Navbar'
-import { createTheme, NextUIProvider } from '@nextui-org/react'
+import { NextUIProvider } from '@nextui-org/react'
+import globalStyles, { darkTheme, lightTheme } from '@styles/global'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { AppComponent } from 'next/dist/shared/lib/router/router'
 import '../scss/main.scss'
 
-const darkTheme = createTheme({ type: 'dark' })
-const lightTheme = createTheme({ type: 'light' })
-
 const App: AppComponent = ({ Component, pageProps }) => {
+	globalStyles()
 	return (
 		<NextThemesProvider
 			defaultTheme='system'
@@ -19,13 +16,7 @@ const App: AppComponent = ({ Component, pageProps }) => {
 			}}
 		>
 			<NextUIProvider>
-				<aside>
-					<Navbar />
-				</aside>
-				<main className='content'>
-					<Component {...pageProps} />
-					<Footer />
-				</main>
+				<Component {...pageProps} />
 			</NextUIProvider>
 		</NextThemesProvider>
 	)

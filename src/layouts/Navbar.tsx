@@ -1,112 +1,257 @@
+import AnimatedLink from '@components/AnimatedLink'
+import { Github, Gmail, LinkedIn } from '@components/icons'
+import Logo from '@components/Logo'
+import MenuToggle from '@components/MenuToggle'
+import { Box } from '@components/primitives'
 import ThemeToggle from '@components/ThemeToggle'
-import { Dropdown, Grid, Image, Link, styled } from '@nextui-org/react'
-import { useMediaQuery } from '../hooks/useMediaQuery'
+import { useMediaQuery, useScrollPosition } from '@hooks'
+import { Route } from '@lib/page'
+import {
+	Col,
+	Container,
+	CSS,
+	Link,
+	Row,
+	Spacer,
+	useBodyScroll,
+	useTheme,
+} from '@nextui-org/react'
+import dynamic from 'next/dynamic'
+import NextLink from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { StyledNavContainer, StyledNavMainContainer } from './styles'
 
-const Navbar = () => {
-	const isTopbar = useMediaQuery('(max-width: 768px)')
+export interface ComponentProps {
+	routes?: Route[]
+	hasNotify?: boolean
+	isHome?: boolean
+}
 
-	const CentredLink = styled(Link, {
-		width: isTopbar ? 'auto' : '100%',
-		justifyContent: 'center',
-	})
+const MobileNavigation = dynamic(
+	() => import('@components/mobile-navigation/MobileNavigation'),
+	{
+		ssr: false,
+	}
+)
+
+const SocialLinkCSS: CSS = {
+	m: '0 6px',
+	'& svg': {
+		transition: '$default',
+	},
+	'&:hover': {
+		'& svg': {
+			opacity: 0.7,
+		},
+	},
+}
+
+const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
+	const router = useRouter()
+	const { theme } = useTheme()
+	const [expanded, setExpanded] = useState(false)
+	const isMobile = useMediaQuery('(max-width: 960px)')
+	const [, setBodyHidden] = useBodyScroll(null, { scrollLayer: true })
+	const scrollPosition = useScrollPosition()
+
+	const detached = hasNotify ? scrollPosition > 30 : scrollPosition > 0
+	const showBlur = !!expanded || !!detached || isHome
+
+	useEffect(() => {
+		if (!isMobile) {
+			setExpanded(false)
+			setBodyHidden(false)
+		}
+	}, [isMobile, setBodyHidden])
+
+	const onToggleNavigation = () => {
+		setExpanded(!expanded)
+
+		if (isMobile) {
+			setBodyHidden(!expanded)
+		}
+	}
 
 	return (
-		<Grid.Container
-			direction={isTopbar ? 'row' : 'column'}
-			css={{
-				padding: '0.5rem',
-				top: isTopbar ? '0' : 'auto',
-				position: isTopbar ? 'fixed' : 'auto',
-				zIndex: '1',
-				backdropFilter: 'saturate(180%) blur(10px)',
-				boxShadow: 'rgba(2, 1, 1, 0.1) 0px 5px 20px -5px',
-				backgroundOrigin: 'padding-box',
-			}}
-			justify={isTopbar ? 'flex-start' : 'center'}
-		>
-			{isTopbar ? (
-				<>
-					<Dropdown>
-						<Dropdown.Trigger>
-							<Image
-								src='/images/logo.png'
-								alt='Max Wood'
+		<StyledNavMainContainer id='navbar-container'>
+			<StyledNavContainer detached={detached} showBlur={showBlur}>
+				<Container lg as='nav' display='flex' wrap='nowrap' alignItems='center'>
+					<Col
+						className='navbar__logo-container'
+						css={{
+							height: '40px',
+							'@mdMax': {
+								width: '100',
+							},
+						}}
+					>
+						<Row justify='flex-start' align='center'>
+							<NextLink href='/'>
+								<Link href='/'>
+									<Logo
+										height={40}
+										width={40}
+										className='navbar__logo'
+										css={{
+											cursor: 'pointer',
+											transition: '$default',
+										}}
+									/>
+								</Link>
+							</NextLink>
+						</Row>
+					</Col>
+					<Col
+						className='navbar__resources-container'
+						css={{
+							'@mdMax': {
+								d: 'none',
+							},
+						}}
+					>
+						<Row justify='center' align='center'>
+							<Spacer x={1} y={0} />
+							<AnimatedLink
+								icon={false}
+								href='/posts'
+								className='navbar__link'
+								title='Blog'
 								css={{
-									aspectRatio: 13 / 9,
-									height: '50px',
+									color: '$text',
+									'&.active': {
+										fontWeight: '600',
+										color: '$primary',
+									},
 								}}
-								containerCss={{
-									marginLeft: '0',
+							>
+								Blog
+							</AnimatedLink>
+							<Spacer x={1} y={0} />
+							<AnimatedLink
+								icon={false}
+								href='/projects'
+								className='navbar__link'
+								title='Projects'
+								css={{
+									color: '$text',
+									'&.active': {
+										fontWeight: '600',
+										color: '$primary',
+									},
+								}}
+							>
+								Projects
+							</AnimatedLink>
+						</Row>
+					</Col>
+					<Col>
+						<Row
+							className='navbar__social-icons-container'
+							justify='flex-end'
+							align='center'
+							gap={1}
+							css={{
+								width: 'initial',
+								'@mdMax': {
+									d: 'none',
+								},
+							}}
+						>
+							<Link
+								className='navbar_social-icon'
+								href='https://github.com/bridges-wood'
+								target='_blank'
+								rel='noreferrer'
+								css={SocialLinkCSS}
+							>
+								<Github size={24} fill={theme.colors.foreground.value} />
+							</Link>
+							<Link
+								className='navbar_social-icon'
+								href='https://www.linkedin.com/in/max-wood-181140182/'
+								target='_blank'
+								rel='noreferrer'
+								css={SocialLinkCSS}
+							>
+								<LinkedIn size={24} fill={theme.colors.foreground.value} />
+							</Link>
+							<Link
+								className='navbar_social-icon'
+								href='mailto:bridges.wood@gmail.com'
+								target='_blank'
+								rel='noreferrer'
+								css={SocialLinkCSS}
+							>
+								<Gmail size={24} fill={theme.colors.foreground.value} />
+							</Link>
+							<ThemeToggle
+								className='navbar_social-icon'
+								css={{
+									m: '0 6px',
+									'& svg': {
+										transition: '$default',
+									},
+									'&:hover': {
+										'& svg': {
+											opacity: 0.7,
+										},
+									},
 								}}
 							/>
-						</Dropdown.Trigger>
-						<Dropdown.Menu>
-							<Dropdown.Item key='home'>
-								<CentredLink href='/'>Home</CentredLink>
-							</Dropdown.Item>
-							<Dropdown.Item key='projects'>
-								<CentredLink href='/projects'>Projects</CentredLink>
-							</Dropdown.Item>
-							<Dropdown.Item key='posts'>
-								<CentredLink href='/posts'>Blog</CentredLink>
-							</Dropdown.Item>
-							<Dropdown.Item key='contact'>
-								<CentredLink href='/contact'>Contact</CentredLink>
-							</Dropdown.Item>
-							<Dropdown.Item key='acknowledgements'>
-								<CentredLink href='/acknowledgements'>
-									Acknowledgements
-								</CentredLink>
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<ThemeToggle
-						size='lg'
+						</Row>
+					</Col>
+					<Col
+						className='navbar__menu-container'
 						css={{
-							marginTop: 'auto',
-							marginBottom: 'auto',
+							size: '100%',
+							display: 'none',
+							'@mdMax': {
+								display: 'flex',
+								justifyContent: 'flex-end',
+							},
 						}}
-					/>
-				</>
-			) : (
-				<>
-					<CentredLink href='/'>
-						<Image
-							src='/images/logo.png'
-							alt='Max Wood'
-							css={{
-								aspectRatio: 13 / 9,
-								height: '50px',
-								marginRight: isTopbar ? '0' : 'auto',
-							}}
-						/>
-					</CentredLink>
-					<Grid.Container
-						direction={isTopbar ? 'row' : 'column'}
-						css={{
-							marginTop: isTopbar ? '0' : 'auto',
-							marginBottom: isTopbar ? '0' : 'auto',
-						}}
-					>
-						<CentredLink href='/projects'>Projects</CentredLink>
-						<CentredLink href='/posts'>Blog</CentredLink>
-						<CentredLink href='/contact'>Contact</CentredLink>
-						<CentredLink href='/acknowledgements'>Acknowledgements</CentredLink>
-					</Grid.Container>
-					<Grid.Container
-						direction={isTopbar ? 'column' : 'row'}
-						justify='center'
 					>
 						<ThemeToggle
-							size='lg'
+							className='navbar__social-icon-mobile'
 							css={{
-								width: isTopbar ? '100%' : 'auto',
+								m: '0',
+
+								mt: '3px',
+								mr: '6px',
 							}}
 						/>
-					</Grid.Container>
-				</>
-			)}
-		</Grid.Container>
+						<Box
+							className='navbar__menu-arrow noselect'
+							onClick={onToggleNavigation}
+							css={{
+								height: '100%',
+								minHeight: '30px',
+								mt: '5px',
+								mb: '5px',
+								minWidth: '30px',
+								display: 'flex',
+								justifyContent: 'flex-end',
+								alignItems: 'center',
+								cursor: 'pointer',
+							}}
+						>
+							<MenuToggle expanded={expanded} />
+						</Box>
+					</Col>
+					<MobileNavigation
+						hasNotify={hasNotify}
+						routes={routes}
+						opened={expanded}
+						detached={detached}
+						onClose={() => {
+							setExpanded(false)
+							setBodyHidden(false)
+						}}
+					/>
+				</Container>
+			</StyledNavContainer>
+		</StyledNavMainContainer>
 	)
 }
 

@@ -1,5 +1,6 @@
-import BlogpostPreview from '@components/BlogpostPreview'
-import FeaturedBlogpost from '@components/FeaturedBlogpost'
+import { BlogpostPreview, FeaturedBlogpost } from '@components/blogposts'
+import PostsLayout from '@layouts/posts'
+import { Grid, Text } from '@nextui-org/react'
 import FrontMatter from '@typings/frontMatter'
 import { postFilePaths, POSTS_PATH } from '@utils/blog'
 import fs from 'fs'
@@ -7,7 +8,7 @@ import matter from 'gray-matter'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import path from 'path'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const FEATURED = 'harrys-hot-tubs'
 
@@ -24,14 +25,26 @@ const Index = ({ featured, posts }: PageProps) => {
 	const [displayed, setDisplayed] = useState(10)
 
 	return (
-		<div className='container'>
+		<PostsLayout>
 			<Head>
 				<title>Blog | Max Wood</title>
 			</Head>
 			{featured ? <FeaturedBlogpost {...featured} /> : null}
-			<div className='latest-posts'>
-				<h1>Latest Posts</h1>
-				<div className='posts-list'>
+			<Grid.Container
+				css={{
+					marginTop: '1rem',
+					marginLeft: '1em',
+				}}
+			>
+				<Grid md={3}>
+					<Text h1>Latest Posts</Text>
+				</Grid>
+				<Grid
+					md={7}
+					css={{
+						flexDirection: 'column',
+					}}
+				>
 					{posts.slice(0, displayed).map((post) => (
 						<BlogpostPreview {...post} key={post.address} />
 					))}
@@ -40,9 +53,9 @@ const Index = ({ featured, posts }: PageProps) => {
 							See more
 						</button>
 					) : null}
-				</div>
-			</div>
-		</div>
+				</Grid>
+			</Grid.Container>
+		</PostsLayout>
 	)
 }
 

@@ -2,11 +2,13 @@ import FeaturedProjectPreview from '@components/FeaturedProjectPreview'
 import Project from '@components/Project'
 import useWindowDimensions from '@hooks/useWindowDimensions'
 import featuredProjects from '@json/featuredProjects'
+import DefaultLayout from '@layouts/default'
+import { Text } from '@nextui-org/react'
 import { GithubProject } from '@typings/api/Projects'
 import fetchProjects from '@utils/repos'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Slider, { Settings as SliderProps } from 'react-slick'
 
 interface PageProps {
@@ -48,27 +50,26 @@ const Projects = ({ projects, featured }: PageProps) => {
 	}, [width])
 
 	return (
-		<div className='outer'>
+		<DefaultLayout>
 			<Head>
 				<title>Projects | Max Wood</title>
 			</Head>
-			<h1>Projects</h1>
-			<p>
+			<Text h1>Projects</Text>
+			<Text>
 				A sample of some of the projects that I&apos;ve worked on for personal
 				projects, assignments and on freelance.
-			</p>
+			</Text>
 			<div className='projects' id='container'>
 				{featured.map((project) => (
 					<FeaturedProjectPreview key={project.title} project={project} />
 				))}
 				<hr />
-				<Slider {...sliderProps} ref={sliderRef}>
-					{projects.map((project) => (
-						<Project key={project.id} project={project} />
-					))}
-				</Slider>
+
+				{projects.map((project) => (
+					<Project key={project.id} project={project} />
+				))}
 			</div>
-		</div>
+		</DefaultLayout>
 	)
 }
 
