@@ -21,7 +21,10 @@
 			"@pages/*": ["pages/*"],
 			"@typings/*": ["typings/*"],
 			"@utils/*": ["utils/*"],
-			"@json/*": ["../json/*.json"]
+			"@*": ["*"],
+			"@lib/*": ["lib/*"],
+			"@json/*": ["../json/*.json"],
+			"@styles/*": ["styles/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
