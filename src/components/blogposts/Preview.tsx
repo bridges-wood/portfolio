@@ -5,12 +5,10 @@ type BlogpostPreviewProps = BlogPost
 
 const BlogpostPreview: FC<BlogpostPreviewProps> = ({ title, address }) => {
 	return (
-		<>
-			<div>
-				<a href={`/posts/${address}`}>{title}</a>
-			</div>
+		<div>
+			<a href={`/posts/${address}`}>{title}</a>
 			<hr />
-		</>
+		</div>
 	)
 }
 

@@ -26,6 +26,8 @@ const Logo: FC<LogoProps> = ({
 		<Image
 			src='/images/logo.png'
 			alt='Max Wood'
+			height={height || size || 40}
+			width={width || size || 40}
 			className={className}
 			css={css}
 			containerCss={containerCSS}
