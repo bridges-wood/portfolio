@@ -1,12 +1,8 @@
-@import './components/footer';
 @import './components/languageBar';
-@import './components/navbar';
-@import './pages/contact';
 @import './pages/error';
-@import './pages/home';
+
 @import './pages/post';
 @import './pages/projects';
-@import './generics';
 @import 'https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css';
 
 
@@ -38,19 +34,6 @@ body::-webkit-scrollbar {
 	display: none;
 }
 
-div[data-overlay-container="true"] {
-	position: relative;
-	border: none;
-	overflow: visible;
-	display: grid;
-	grid-template-columns: 100%;
-	grid-template-rows: 4em calc(100% - 4em);
-}
-
-div[data-overlay-container="true"]::-webkit-scrollbar {
-	display: none;
-}
-
 .content {
 	display: grid;
 	padding: 30px 20px 40px 20px;
@@ -69,15 +52,4 @@ div[data-overlay-container="true"]::-webkit-scrollbar {
 aside {
 	display: flex;
 	justify-content: flex-end;
-}
-
-@media (min-width: 768px) {
-	div[data-overlay-container="true"] {
-		grid-template-rows: 100%;
-		grid-template-columns: 20ch calc(100% - 20ch);
-	}
-
-	.content {
-		padding: 20px 20px 40px 20px;
-	}
 }
