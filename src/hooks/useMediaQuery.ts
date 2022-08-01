@@ -1,3 +1,4 @@
+import { NextUITheme, useTheme } from '@nextui-org/react'
 import { useCallback, useEffect, useState } from 'react'
 
 const useMediaQuery = (query: string) => {
@@ -23,5 +24,12 @@ const useMediaQuery = (query: string) => {
 
 	return targetReached
 }
+
+export const useBreakpoint = (breakpoint: keyof NextUITheme['breakpoints']) => {
+	const { theme } = useTheme()
+	return useMediaQuery(`(max-width: ${theme.breakpoints[breakpoint].value})`)
+}
+
+export const useIsMobile = () => useMediaQuery('(max-width: 960px)')
 
 export default useMediaQuery
