@@ -1,6 +1,12 @@
 import { createTheme, globalCss } from '@nextui-org/react'
 
 const globalStyles = globalCss({
+	html: {
+		scrollBehavior: 'smooth',
+		'@media (prefers-reduced-motion: reduce)': {
+			scrollBehavior: 'auto',
+		},
+	},
 	h1: {
 		fontWeight: 'lighter !important',
 	},

@@ -2,7 +2,6 @@ import { NextUIProvider } from '@nextui-org/react'
 import globalStyles, { darkTheme, lightTheme } from '@styles/global'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { AppComponent } from 'next/dist/shared/lib/router/router'
-import '../scss/main.scss'
 
 const App: AppComponent = ({ Component, pageProps }) => {
 	globalStyles()
