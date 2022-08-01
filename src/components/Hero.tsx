@@ -1,28 +1,9 @@
-import GradientRect, { GradientRectProps } from '@components/GradientRect'
+import GradientPill from '@components/GradientRect'
 import { Container, Row, styled, Text } from '@nextui-org/react'
 import { FC } from 'react'
 
-const BlueToGreen: GradientRectProps = {
-	start: '#42ddf5',
-	end: '#12e652',
-}
-
-const YellowToOrange: GradientRectProps = {
-	start: '#f0e335',
-	end: '#e68a22',
-}
-
-const Grey: GradientRectProps = {
-	start: '#555555',
-	end: '#555555',
-}
-
-const PurpleToRed = {
-	start: '#b517d1',
-	end: '#e31717',
-}
-
 const PaddedRow = styled(Row, {
+	width: '100%',
 	padding: '0.2em 0 0.2em 0',
 })
 
@@ -45,18 +26,18 @@ const Hero: FC = () => {
 		>
 			<Container className='hero__container'>
 				<PaddedRow>
-					<GradientRect {...{ ...BlueToGreen, length: 90 }} />
-					<GradientRect {...{ ...YellowToOrange, length: 50 }} />
-					<GradientRect {...{ ...Grey, length: 12 }} />
+					<GradientPill width={90} start='#42ddf5' end='#12e652' />
+					<GradientPill width={50} start='#f0e335' end='#e68a22' />
+					<GradientPill width={12} start='#555' />
 				</PaddedRow>
 				<PaddedRow>
-					<GradientRect {...{ ...PurpleToRed, length: 100 }} />
+					<GradientPill width={100} start='#b517d1' end='#e31717' />
 				</PaddedRow>
 				<PaddedRow>
-					<GradientRect {...{ ...YellowToOrange, length: 40 }} />
-					<GradientRect {...{ ...Grey, length: 12 }} />
-					<GradientRect {...{ ...Grey, length: 30 }} />
-					<GradientRect {...{ ...YellowToOrange, length: 70 }} />
+					<GradientPill width={40} start='#f0e335' end='#e68a22' />
+					<GradientPill width={12} start='#555' />
+					<GradientPill width={30} start='#555' />
+					<GradientPill width={70} start='#f0e335' end='#e68a22' />
 				</PaddedRow>
 				<Container
 					css={{
@@ -65,23 +46,21 @@ const Hero: FC = () => {
 						paddingRight: '0',
 					}}
 				>
-					<Text h1 weight={'light'}>
-						Max Wood
-					</Text>
-					<Text>Student and freelance web-developer.</Text>
+					<Text h1>Max Wood</Text>
+					<Text>Student and freelance developer.</Text>
 				</Container>
 				<PaddedRow>
-					<GradientRect {...{ ...Grey, length: 100 }} />
-					<GradientRect {...{ ...BlueToGreen, length: 50 }} />
+					<GradientPill width={100} start='#555' />
+					<GradientPill width={50} start='#42ddf5' end='#12e652' />
 				</PaddedRow>
 				<PaddedRow>
-					<GradientRect {...{ ...BlueToGreen, length: 60 }} />
-					<GradientRect {...{ ...YellowToOrange, length: 35 }} />
-					<GradientRect {...{ ...BlueToGreen, length: 150 }} />
+					<GradientPill width={60} start='#42ddf5' end='#12e652' />
+					<GradientPill width={35} start='#f0e335' end='#e68a22' />
+					<GradientPill width={150} start='#42ddf5' end='#12e652' />
 				</PaddedRow>
-				<PaddedRow />
+
 				<PaddedRow>
-					<GradientRect {...{ ...PurpleToRed, length: 70 }} />
+					<GradientPill width={70} start='#b517d1' end='#e31717' />
 				</PaddedRow>
 			</Container>
 		</Container>

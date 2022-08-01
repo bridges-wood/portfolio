@@ -37,7 +37,13 @@ const MobileNavigation: FC<MobileNavigationProps> = ({
 				hasNotify={hasNotify}
 			>
 				<MobileNavigationWrapper>
-					<ul className='mobile-navigation__list'>
+					<ul
+						className='mobile-navigation__list'
+						style={{
+							margin: 0,
+							padding: '16px 0 16px 16px',
+						}}
+					>
 						<li>
 							<Sidebar routes={routes} onPostClick={handlePostClick} />
 						</li>

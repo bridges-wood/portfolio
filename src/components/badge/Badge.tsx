@@ -4,11 +4,11 @@ import { FC, PropsWithChildren } from 'react'
 import { BadgeVariantsProps, StyledBadge } from './badge.styles'
 
 interface Props {
-	className: string
+	className?: string
 	css?: CSS
 }
 
-type BadgeProps = Props & NativeAttributes<Props> & BadgeVariantsProps
+export type BadgeProps = Props & NativeAttributes<Props> & BadgeVariantsProps
 
 const Badge: FC<PropsWithChildren<BadgeProps>> = ({ children, ...props }) => (
 	<StyledBadge {...props}>{children}</StyledBadge>

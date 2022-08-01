@@ -2,10 +2,21 @@ import { Link, LinkProps } from '@nextui-org/react'
 import NextLink from 'next/link'
 import { FC } from 'react'
 
-const AnimatedLink: FC<LinkProps> = ({ children, css, href, ...props }) => (
-	<NextLink href={href}>
+interface AnimatedLinkProps extends LinkProps {
+	href?: string
+}
+
+const AnimatedLink: FC<AnimatedLinkProps> = ({
+	children,
+	css,
+	href,
+	onClick,
+	...props
+}) => (
+	<NextLink href={href || ''}>
 		<Link
 			href={href}
+			onClick={onClick}
 			css={{
 				...css,
 				position: 'relative',

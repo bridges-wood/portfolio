@@ -1,9 +1,9 @@
 import { CSS, styled } from '@nextui-org/react'
 
 export interface IconProps {
-	width?: number
-	height?: number
-	size?: number
+	width?: number | string
+	height?: number | string
+	size?: number | string
 	fill?: string
 	className?: string
 	css?: CSS

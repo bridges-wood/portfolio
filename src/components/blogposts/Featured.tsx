@@ -1,3 +1,4 @@
+import { parseDate } from '@lib/date'
 import { Card, Col, Text } from '@nextui-org/react'
 import type { BlogPost } from '@pages/posts'
 import { useRouter } from 'next/router'
@@ -7,7 +8,7 @@ type FeaturedBlogpostProps = BlogPost
 
 const FeaturedBlogpost: FC<FeaturedBlogpostProps> = ({
 	title,
-	address,
+	slug: address,
 	date,
 }) => {
 	const router = useRouter()
@@ -16,7 +17,6 @@ const FeaturedBlogpost: FC<FeaturedBlogpostProps> = ({
 		<Card
 			isPressable
 			onPress={() => {
-				console.log('here')
 				router.push(`/posts/${address}`)
 			}}
 		>
@@ -33,7 +33,7 @@ const FeaturedBlogpost: FC<FeaturedBlogpostProps> = ({
 						{title}
 					</Text>
 					<Text css={{ lp: 4 }} color='#ffffffAA'>
-						Published on {new Date(date).toLocaleDateString()}
+						Published on {parseDate(date).toLocaleDateString()}
 					</Text>
 				</Col>
 			</Card.Header>

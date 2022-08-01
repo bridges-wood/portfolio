@@ -1,9 +1,15 @@
 import { Link } from '@components/icons'
-import { Text } from '@nextui-org/react'
+import { slugify } from '@lib/posts'
+import { styled, Text, useTheme } from '@nextui-org/react'
 import React, { FC } from 'react'
 
 export interface AnchoredHeadingProps {
-	level: number
+	h1?: boolean
+	h2?: boolean
+	h3?: boolean
+	h4?: boolean
+	h5?: boolean
+	h6?: boolean
 	children?: React.ReactNode
 }
 
@@ -14,85 +20,71 @@ export interface AnchoredHeadingProps {
  * @returns An anchor string.
  */
 const getAnchor = (text: string) => {
-	return text
-		.toLowerCase()
-		.replace(/[^a-z0-9 ]/g, '')
-		.replace(/[ ]/g, '-')
+	return slugify(text)
 }
 
-const AnchoredHeading: FC<AnchoredHeadingProps> = ({ level, children }) => {
+const AnchorLink = styled('a', {
+	opacity: 0.2,
+	position: 'absolute',
+	transform: 'translateX(-1em) translateY(0.15em)',
+	'&:hover': {
+		opacity: 1,
+	},
+})
+
+const AnchorText = styled(Text, {
+	scrollMarginTop: '76px',
+})
+
+const AnchoredHeading: FC<AnchoredHeadingProps> = ({ children, ...props }) => {
+	const { theme } = useTheme()
 	if (typeof children !== 'string') {
 		throw new Error('AnchoredHeading expects a string child')
 	}
 
 	const anchor = getAnchor(children as string)
 	const link = `#${anchor}`
-
-	switch (level) {
-		case 1:
-			return (
-				<Text h1 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
-		case 2:
-			return (
-				<Text h2 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
-		case 3:
-			return (
-				<Text h3 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
-		case 4:
-			return (
-				<Text h4 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
-		case 5:
-			return (
-				<Text h5 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
-		case 6:
-			return (
-				<Text h6 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
-		default:
-			return (
-				<Text h1 id={anchor}>
-					<a href={link} className='anchor-link'>
-						<Link />
-					</a>
-					{children}
-				</Text>
-			)
+	const calculateLinkSize = ({
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+	}: AnchoredHeadingProps): string | number => {
+		if (h1) {
+			return theme.fontSizes.xl5.value
+		} else if (h2) {
+			return theme.fontSizes.xl4.value
+		} else if (h3) {
+			return theme.fontSizes.xl2.value
+		} else if (h4) {
+			return theme.fontSizes.xl.value
+		} else if (h5) {
+			return theme.fontSizes.lg.value
+		} else if (h6) {
+			return theme.fontSizes.md.value
+		} else {
+			return theme.fontSizes.md.value
+		}
 	}
+
+	return (
+		<AnchorText
+			id={anchor}
+			{...props}
+			className='linked-heading'
+			data-name={children}
+		>
+			<AnchorLink href={link}>
+				<Link
+					fill={theme.colors.accents9.value}
+					size={calculateLinkSize({ ...props })}
+				/>
+			</AnchorLink>
+			<span>{children}</span>
+		</AnchorText>
+	)
 }
 
 export default AnchoredHeading
