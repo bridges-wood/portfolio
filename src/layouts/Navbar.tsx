@@ -4,7 +4,7 @@ import Logo from '@components/Logo'
 import MenuToggle from '@components/MenuToggle'
 import { Box } from '@components/primitives'
 import ThemeToggle from '@components/ThemeToggle'
-import { useMediaQuery, useScrollPosition } from '@hooks'
+import { useIsMobile, useScrollPosition } from '@hooks'
 import { Route } from '@lib/page'
 import {
 	Col,
@@ -51,8 +51,8 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 	const router = useRouter()
 	const { theme } = useTheme()
 	const [expanded, setExpanded] = useState(false)
-	const isMobile = useMediaQuery('(max-width: 960px)')
-	const [, setBodyHidden] = useBodyScroll(null, { scrollLayer: true })
+	const isMobile = useIsMobile()
+	const [bodyHidden, setBodyHidden] = useBodyScroll(null, { scrollLayer: true })
 	const scrollPosition = useScrollPosition()
 
 	const detached = hasNotify ? scrollPosition > 30 : scrollPosition > 0
@@ -105,7 +105,7 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 					<Col
 						className='navbar__resources-container'
 						css={{
-							'@mdMax': {
+							'@smMax': {
 								d: 'none',
 							},
 						}}
@@ -143,6 +143,39 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 							>
 								Projects
 							</AnimatedLink>
+							<Spacer x={1} y={0} />
+
+							<AnimatedLink
+								icon={false}
+								href='/contact'
+								className='navbar__link'
+								title='Contact'
+								css={{
+									color: '$text',
+									'&.active': {
+										fontWeight: '600',
+										color: '$primary',
+									},
+								}}
+							>
+								Contact
+							</AnimatedLink>
+							<Spacer x={1} y={0} />
+							<AnimatedLink
+								icon={false}
+								href='/acknowledgements'
+								className='navbar__link'
+								title='Acknowledgements'
+								css={{
+									color: '$text',
+									'&.active': {
+										fontWeight: '600',
+										color: '$primary',
+									},
+								}}
+							>
+								Acknowledgements
+							</AnimatedLink>
 						</Row>
 					</Col>
 					<Col>
@@ -153,7 +186,7 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 							gap={1}
 							css={{
 								width: 'initial',
-								'@mdMax': {
+								'@smMax': {
 									d: 'none',
 								},
 							}}
@@ -206,7 +239,7 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 						css={{
 							size: '100%',
 							display: 'none',
-							'@mdMax': {
+							'@smMax': {
 								display: 'flex',
 								justifyContent: 'flex-end',
 							},
@@ -223,7 +256,9 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 						/>
 						<Box
 							className='navbar__menu-arrow noselect'
-							onClick={onToggleNavigation}
+							onClick={() => {
+								onToggleNavigation()
+							}}
 							css={{
 								height: '100%',
 								minHeight: '30px',

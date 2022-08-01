@@ -1,11 +1,11 @@
 import { BlogpostLink } from '@components/blogposts'
 import Heading from '@components/Heading'
-import { useMediaQuery } from '@hooks'
+import { NavLinkProps } from '@components/NavLink'
+import { useIsMobile } from '@hooks'
 import { addTagToSlug, Route } from '@lib/page'
 import { NativeAttributes } from '@typings'
 import { removeAfterLast } from '@utils'
 import { FC } from 'react'
-import { NavLinkProps } from '../components/NavLink'
 
 interface Props {
 	routes?: Route[]
@@ -29,7 +29,7 @@ const Sidebar: FC<SidebarProps> = ({
 	slug = '',
 	onPostClick,
 }) => {
-	const isMobile = useMediaQuery('(max-width: 650px)')
+	const isMobile = useIsMobile()
 
 	return (
 		<>

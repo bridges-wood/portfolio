@@ -1,12 +1,14 @@
 import Fixed from '@components/Fixed'
+import PageNav from '@components/PageNav'
+import TableOfContents from '@components/TableOfContents'
 import { Route } from '@lib/page'
 import { Col, Container, Row } from '@nextui-org/react'
 import FrontMatter from '@typings/frontMatter'
 import { getHeadings, Heading } from '@utils/headings'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
+import Footer from './Footer'
 import { DefaultRoutes } from './index'
 import Navbar from './Navbar'
-import Sidebar from './Sidebar'
 
 export interface PostsLayoutProps {
 	routes?: Route[]
@@ -16,6 +18,7 @@ export interface PostsLayoutProps {
 	meta?: FrontMatter
 	tag?: string
 	slug?: string
+	includeTableOfContents?: boolean
 }
 
 const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
@@ -27,12 +30,13 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 	meta,
 	tag,
 	slug,
+	includeTableOfContents = true,
 }) => {
 	const [headings, setHeadings] = useState<Heading[]>([])
 
 	useEffect(() => {
 		setHeadings(getHeadings())
-	}, [routes])
+	}, [])
 
 	return (
 		<div id='app-container'>
@@ -45,46 +49,61 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 				display='flex'
 				css={{
 					position: 'relative',
+					'@xs': {
+						p: '0 48px 0 48px',
+					},
+					'@sm': {
+						p: '0 64px 0 64px',
+					},
 				}}
 			>
 				<Row
 					className='posts__content'
 					gap={0}
 					css={{
+						justifyContent: 'center',
 						'@lg': {
 							pt: '1rem',
 						},
+						minHeight: 'calc(100vh - 76px)',
+						'@xsMax': {
+							minHeight: 'calc(100vh - 64px)',
+						},
 					}}
 				>
-					<Col
-						css={{
-							w: '32%',
-							d: 'none',
-							'@md': {
-								d: 'block',
-							},
-						}}
-					>
-						<Fixed
-							offset={92}
-							className='posts__left-sidebar'
+					{includeTableOfContents ? (
+						<Col
 							css={{
-								maxH: 'calc(100vh - 4rem)',
-								overflow: 'auto',
-								zIndex: '$2',
-								pb: '$28',
-								'&::-webkit-scrollbar': {
-									width: '0px',
+								w: '32%',
+								d: 'none',
+								'@md': {
+									d: 'block',
 								},
 							}}
 						>
-							<Sidebar routes={routes} tag={tag} slug={slug} />
-						</Fixed>
-					</Col>
+							<Fixed
+								offset={92}
+								className='posts__left-sidebar'
+								css={{
+									maxH: 'calc(100vh - 4rem)',
+									overflow: 'auto',
+									zIndex: '$2',
+									pb: '$28',
+									'&::-webkit-scrollbar': {
+										width: '0px',
+									},
+								}}
+							>
+								<TableOfContents headings={headings} />
+							</Fixed>
+						</Col>
+					) : null}
+
 					<Col
-						className='docs__center'
+						className='posts__center'
 						css={{
 							zIndex: '$10',
+							m: '0 $4 0 $4',
 							maxW: '100%',
 							overflow: 'auto',
 							'@xsMax': {
@@ -93,8 +112,10 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 						}}
 					>
 						{children}
+						<PageNav tag={tag} prevRoute={prevRoute} nextRoute={nextRoute} />
 					</Col>
 				</Row>
+				<Footer />
 			</Container>
 		</div>
 	)
