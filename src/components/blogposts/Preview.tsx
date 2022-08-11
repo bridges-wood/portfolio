@@ -7,6 +7,10 @@ import type { BlogPost } from '@pages/posts'
 import Link from 'next/link'
 import { FC } from 'react'
 
+const DEFAULT_IMAGE = 'https://picsum.photos/id/1/1920/1080'
+const DEFAULT_AUTHOR_IMAGE =
+	'https://avatars.githubusercontent.com/u/45072525?v=4'
+
 interface BlogpostPreviewProps extends BlogPost {
 	showTags?: boolean
 }
@@ -15,10 +19,13 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 	title,
 	subtitle,
 	slug: address,
+	coverImage = DEFAULT_IMAGE,
 	date,
 	author,
 	tags,
 	wordCount,
+	url,
+	isLocal,
 	showTags = true,
 }) => {
 	const isSm = useBreakpoint('sm')
@@ -52,7 +59,7 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 				<Row>
 					<User
 						name={author}
-						src='https://avatars.githubusercontent.com/u/45072525?v=4'
+						src={author === 'Max Wood' ? DEFAULT_AUTHOR_IMAGE : undefined}
 						size='xs'
 						css={{
 							p: '0 0 $2 0',
@@ -64,7 +71,7 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 						}}
 					/>
 				</Row>
-				<Link href={`/posts/${address}`} passHref>
+				<Link href={isLocal ? `/posts/${address}` : url} passHref>
 					<a
 						href={address}
 						style={{
@@ -249,7 +256,7 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 					<Link href={`/posts/${address}`} passHref>
 						<a>
 							<Image
-								src='https://picsum.photos/id/1/1920/1080'
+								src={coverImage}
 								alt='Placeholder'
 								objectFit={isSm ? 'cover' : 'contain'}
 								containerCss={{

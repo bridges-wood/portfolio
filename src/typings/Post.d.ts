@@ -23,8 +23,4 @@ interface Post {
 	isLocal: false
 }
 
-const isRemotePost = (post: Post): post is RemotePost => {
-	return post.isLocal === false
-}
-
 export default Post

@@ -1,10 +1,11 @@
 import { BlogpostPreview } from '@components/blogposts'
 import { TagList } from '@components/tags'
+import articles from '@json/articles'
 import PostsLayout from '@layouts/posts'
 import { countWords, slugify } from '@lib/posts'
-import { Grid, Spacer, Text } from '@nextui-org/react'
-import FrontMatter from '@typings/frontMatter'
-import { postFilePaths, POSTS_PATH } from '@utils/posts'
+import { Col, Grid, Spacer, Text } from '@nextui-org/react'
+import { default as FrontMatter, default as Post } from '@typings/Post'
+import { countRemoteWords, postFilePaths, POSTS_PATH } from '@utils/posts'
 import { readFileSync } from 'fs'
 import matter from 'gray-matter'
 import _ from 'lodash'
@@ -15,8 +16,7 @@ import { useState } from 'react'
 
 const FEATURED = 'harrys-hot-tubs'
 
-export interface BlogPost extends FrontMatter {
-	slug: string
+export interface BlogPost extends Post {
 	wordCount: number
 }
 
@@ -26,8 +26,10 @@ interface PageProps {
 	tags: string[]
 }
 
-const Index = ({ featured, posts, tags }: PageProps) => {
-	const [displayed, setDisplayed] = useState(10)
+const Index = ({ posts, tags }: PageProps) => {
+	const [displayed, setDisplayed] = useState(
+		posts.length > 10 ? 10 : posts.length
+	)
 
 	return (
 		<PostsLayout includeTableOfContents={false}>
@@ -74,6 +76,22 @@ const Index = ({ featured, posts, tags }: PageProps) => {
 						{posts.slice(0, displayed).map((post) => (
 							<BlogpostPreview {...post} key={post.slug} />
 						))}
+						{displayed === posts.length ? (
+							<Col
+								css={{
+									d: 'flex',
+									flexDirection: 'column',
+								}}
+							>
+								<Spacer y={1} />
+								<Text small css={{ m: '0 auto', color: '$accents6' }}>
+									⋮
+								</Text>
+								<Text small css={{ m: '0 auto', color: '$accents6' }}>
+									That&apos;s all there is to see, so far.
+								</Text>
+							</Col>
+						) : null}
 						{displayed < posts.length ? (
 							<button onClick={() => setDisplayed(displayed + 10)}>
 								See more
@@ -166,6 +184,7 @@ const Index = ({ featured, posts, tags }: PageProps) => {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
+	// Get all local posts
 	const hydratedPosts: BlogPost[] = postFilePaths.map((postFileName) => {
 		const completePath = join(POSTS_PATH, postFileName)
 		const source = readFileSync(completePath)
@@ -175,15 +194,35 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 			...(data as FrontMatter),
 			slug: slugify(postFileName.replace(/\.mdx?$/, '')),
 			wordCount: countWords(content),
+			isLocal: true,
 		}
 	})
 
-	const published = hydratedPosts.filter((post) => post.isPublished)
+	// Get all remote posts
+	const hydratedArticles: BlogPost[] = await Promise.all(
+		articles.map(async (article: Post) => {
+			return {
+				...article,
+				wordCount: await countRemoteWords(article.url),
+			}
+		})
+	)
 
+	const allPosts = hydratedPosts.concat(hydratedArticles)
+
+	const published = allPosts.filter((post) => {
+		// All remote posts are published by default
+		if (!post.isLocal) return true
+
+		return post.isPublished
+	})
+
+	// Sort by date, newest first
 	const postsByDate = published.sort(
 		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 	)
 
+	// Get all unique tags
 	const uniqueTags = _.uniq(published.map((post) => post?.tags).flat())
 
 	return {

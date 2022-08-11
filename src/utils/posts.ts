@@ -1,8 +1,9 @@
 import { countWords, slugify } from '@lib/posts'
 import { BlogPost } from '@pages/posts/index'
-import FrontMatter from '@typings/frontMatter'
+import FrontMatter from '@typings/Post'
 import { readdirSync, readFileSync } from 'fs'
 import matter from 'gray-matter'
+import { JSDOM } from 'jsdom'
 import _ from 'lodash'
 import { join } from 'path'
 
@@ -35,3 +36,18 @@ export const getPostsByTag = _.memoize((tag: string): BlogPost[] => {
 		})
 		.filter((post) => post.tags.includes(tag))
 })
+
+/**
+ * Counts the number of words in a blogpost from a remote URL.
+ *
+ * @param url The url from which the words are to be counted.
+ * @returns The number of words in the blogpost.
+ */
+export const countRemoteWords = async (url: string) => {
+	const res = await fetch(url)
+	const html = await res.text()
+	const doc = new JSDOM(html).window.document
+	const text = doc.getElementsByTagName('body')[0].textContent
+
+	return countWords(text)
+}
