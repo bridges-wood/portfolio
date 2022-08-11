@@ -2,10 +2,13 @@
 	{
 		"title": "Harry's Hot Tubs Booking Site",
 		"url": "https://harryshottubs.com",
+		"description": "Hot tub booking website with integrated payment and internal order management dashboard. My first foray into professional web development.",
 		"images": {
-			"previewMobile": "/images/harrys-hot-tubs/harryshottubs.com_(iPhone%20X).png",
-			"previewTablet": "/images/harrys-hot-tubs/harryshottubs.com_(iPad).png",
-			"previewDesktop": "/images/harrys-hot-tubs/harryshottubs.com_.png"
-		}
+			"previewMobile": "/images/harrys-hot-tubs/iPhone X.png",
+			"previewTablet": "/images/harrys-hot-tubs/iPad.png",
+			"previewDesktop": "/images/harrys-hot-tubs/desktop1.png"
+		},
+		"tags": ["Next.js", "Web Design", "Freelance"],
+		"github": "https://github.com/harrys-hot-tubs/HHT"
 	}
 ]
