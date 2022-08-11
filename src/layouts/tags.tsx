@@ -1,6 +1,6 @@
 import { Route } from '@lib/page'
 import { Col, Container, Row } from '@nextui-org/react'
-import FrontMatter from '@typings/frontMatter'
+import FrontMatter from '@typings/Post'
 import { FC, PropsWithChildren } from 'react'
 import Footer from './Footer'
 import { DefaultRoutes } from './index'

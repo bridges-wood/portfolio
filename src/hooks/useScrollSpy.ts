@@ -25,7 +25,6 @@ export const useScrollSpy = (
 			entries.forEach((entry) => {
 				if (entry?.isIntersecting) {
 					const id = entry.target.getAttribute('id')
-					console.log('id', id)
 					setActiveId(id)
 				}
 			})

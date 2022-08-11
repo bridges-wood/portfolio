@@ -17,12 +17,6 @@ const Acknowledgements = () => {
 				</div>
 				<ul>
 					<li>
-						<AnimatedLink icon={false} href='https://fontawesome.com/license'>
-							Font Awesome
-						</AnimatedLink>
-						, for their outstanding free icons.
-					</li>
-					<li>
 						<AnimatedLink icon={false} href='https://jrgarciadev.com/'>
 							Junior Garcia
 						</AnimatedLink>
