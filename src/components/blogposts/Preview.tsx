@@ -3,7 +3,7 @@ import { useBreakpoint } from '@hooks'
 import { parseDate } from '@lib/date'
 import { readingTime } from '@lib/posts'
 import { Col, Grid, Image, Row, Text, User } from '@nextui-org/react'
-import type { BlogPost } from '@pages/posts'
+import { isLocalPost, PostWithWordCount } from '@typings/Post'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -11,23 +11,24 @@ const DEFAULT_IMAGE = 'https://picsum.photos/id/1/1920/1080'
 const DEFAULT_AUTHOR_IMAGE =
 	'https://avatars.githubusercontent.com/u/45072525?v=4'
 
-interface BlogpostPreviewProps extends BlogPost {
+type BlogpostPreviewProps = PostWithWordCount & {
 	showTags?: boolean
 }
 
 const BlogpostPreview: FC<BlogpostPreviewProps> = ({
-	title,
-	subtitle,
-	slug: address,
-	coverImage = DEFAULT_IMAGE,
-	date,
-	author,
-	tags,
-	wordCount,
-	url,
-	isLocal,
 	showTags = true,
+	...post
 }) => {
+	const {
+		title,
+		subtitle,
+		coverImage = DEFAULT_IMAGE,
+		date,
+		author,
+		tags,
+		wordCount,
+	} = post
+	const href = isLocalPost(post) ? `/posts/${post.slug}` : post.url
 	const isSm = useBreakpoint('sm')
 
 	return (
@@ -71,9 +72,8 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 						}}
 					/>
 				</Row>
-				<Link href={isLocal ? `/posts/${address}` : url} passHref>
+				<Link href={href} passHref>
 					<a
-						href={address}
 						style={{
 							color: 'inherit',
 						}}
@@ -253,7 +253,7 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 				}}
 			>
 				<Row>
-					<Link href={`/posts/${address}`} passHref>
+					<Link href={href} passHref>
 						<a>
 							<Image
 								src={coverImage}

@@ -2,7 +2,7 @@ import { BlogpostPreview } from '@components/blogposts'
 import TagsLayout from '@layouts/tags'
 import { formatSlug, slugify } from '@lib/posts'
 import { Container, Grid, Spacer, Text } from '@nextui-org/react'
-import { BlogPost } from '@pages/posts'
+import { PostWithWordCount } from '@typings/Post'
 import { getPostsByTag, postFilePaths, POSTS_PATH } from '@utils/posts'
 import { readFileSync } from 'fs'
 import matter from 'gray-matter'
@@ -13,7 +13,7 @@ import { FC, useState } from 'react'
 
 interface TagPageProps {
 	tag: string
-	posts: BlogPost[]
+	posts: PostWithWordCount[]
 }
 
 const TagPage: FC<TagPageProps> = ({ tag, posts }) => {
@@ -89,8 +89,8 @@ const TagPage: FC<TagPageProps> = ({ tag, posts }) => {
 							},
 						}}
 					>
-						{posts.slice(0, displayed).map((post) => (
-							<BlogpostPreview {...post} key={post.slug} showTags={false} />
+						{posts.slice(0, displayed).map((post, idx) => (
+							<BlogpostPreview {...post} key={idx} showTags={false} />
 						))}
 						{displayed > posts.length ? (
 							<>

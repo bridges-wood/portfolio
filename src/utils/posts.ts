@@ -1,6 +1,5 @@
 import { countWords, slugify } from '@lib/posts'
-import { BlogPost } from '@pages/posts/index'
-import FrontMatter from '@typings/Post'
+import FrontMatter, { FrontMatterWithWordCount } from '@typings/Post'
 import { readdirSync, readFileSync } from 'fs'
 import matter from 'gray-matter'
 import { JSDOM } from 'jsdom'
@@ -21,21 +20,24 @@ export const postFilePaths = readdirSync(POSTS_PATH).filter((path) =>
  * @param tag The tag to filter by.
  * @returns An array of posts that have the tag in their metadata.
  */
-export const getPostsByTag = _.memoize((tag: string): BlogPost[] => {
-	return postFilePaths
-		.map((postFileName) => {
-			const qualifiedPath = join(POSTS_PATH, postFileName)
-			const source = readFileSync(qualifiedPath)
-			const { content, data } = matter(source)
+export const getPostsByTag = _.memoize(
+	(tag: string): FrontMatterWithWordCount[] => {
+		return postFilePaths
+			.map((postFileName) => {
+				const qualifiedPath = join(POSTS_PATH, postFileName)
+				const source = readFileSync(qualifiedPath)
+				const { content, data } = matter(source)
 
-			return {
-				...(data as FrontMatter),
-				slug: slugify(postFileName.replace(/\.mdx?$/, '')),
-				wordCount: countWords(content),
-			}
-		})
-		.filter((post) => post.tags.includes(tag))
-})
+				return {
+					...(data as FrontMatter),
+					slug: slugify(postFileName.replace(/\.mdx?$/, '')),
+					wordCount: countWords(content),
+					isLocal: true,
+				} as FrontMatterWithWordCount
+			})
+			.filter((post) => post.tags.includes(tag))
+	}
+)
 
 /**
  * Counts the number of words in a blogpost from a remote URL.

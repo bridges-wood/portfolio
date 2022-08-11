@@ -4,7 +4,13 @@ import articles from '@json/articles'
 import PostsLayout from '@layouts/posts'
 import { countWords, slugify } from '@lib/posts'
 import { Col, Grid, Spacer, Text } from '@nextui-org/react'
-import { default as FrontMatter, default as Post } from '@typings/Post'
+import {
+	FrontMatter,
+	FrontMatterWithWordCount,
+	PostWithWordCount,
+	RemotePost,
+	RemotePostWithWordCount,
+} from '@typings/Post'
 import { countRemoteWords, postFilePaths, POSTS_PATH } from '@utils/posts'
 import { readFileSync } from 'fs'
 import matter from 'gray-matter'
@@ -14,19 +20,13 @@ import Head from 'next/head'
 import { join } from 'path'
 import { useState } from 'react'
 
-const FEATURED = 'harrys-hot-tubs'
-
-export interface BlogPost extends Post {
-	wordCount: number
-}
-
 interface PageProps {
-	featured: BlogPost
-	posts: BlogPost[]
+	featured?: PostWithWordCount
+	posts: PostWithWordCount[]
 	tags: string[]
 }
 
-const Index = ({ posts, tags }: PageProps) => {
+const Index = ({ posts, tags, featured }: PageProps) => {
 	const [displayed, setDisplayed] = useState(
 		posts.length > 10 ? 10 : posts.length
 	)
@@ -73,8 +73,8 @@ const Index = ({ posts, tags }: PageProps) => {
 							},
 						}}
 					>
-						{posts.slice(0, displayed).map((post) => (
-							<BlogpostPreview {...post} key={post.slug} />
+						{posts.slice(0, displayed).map((post, idx) => (
+							<BlogpostPreview {...post} key={idx} />
 						))}
 						{displayed === posts.length ? (
 							<Col
@@ -185,30 +185,32 @@ const Index = ({ posts, tags }: PageProps) => {
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
 	// Get all local posts
-	const hydratedPosts: BlogPost[] = postFilePaths.map((postFileName) => {
-		const completePath = join(POSTS_PATH, postFileName)
-		const source = readFileSync(completePath)
-		const { content, data } = matter(source)
+	const hydratedPosts: FrontMatterWithWordCount[] = postFilePaths.map(
+		(postFileName) => {
+			const completePath = join(POSTS_PATH, postFileName)
+			const source = readFileSync(completePath)
+			const { content, data } = matter(source)
 
-		return {
-			...(data as FrontMatter),
-			slug: slugify(postFileName.replace(/\.mdx?$/, '')),
-			wordCount: countWords(content),
-			isLocal: true,
+			return {
+				...(data as FrontMatter),
+				slug: slugify(postFileName.replace(/\.mdx?$/, '')),
+				wordCount: countWords(content),
+				isLocal: true,
+			}
 		}
-	})
+	)
 
 	// Get all remote posts
-	const hydratedArticles: BlogPost[] = await Promise.all(
-		articles.map(async (article: Post) => {
+	const hydratedArticles: RemotePostWithWordCount[] = await Promise.all(
+		articles.map(async (article: RemotePost) => {
 			return {
 				...article,
 				wordCount: await countRemoteWords(article.url),
-			}
+			} as RemotePostWithWordCount
 		})
 	)
 
-	const allPosts = hydratedPosts.concat(hydratedArticles)
+	const allPosts: PostWithWordCount[] = [...hydratedPosts, ...hydratedArticles]
 
 	const published = allPosts.filter((post) => {
 		// All remote posts are published by default
@@ -227,7 +229,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 
 	return {
 		props: {
-			featured: published.find((post) => post.slug === FEATURED),
+			// ! Currently no posts are to be featured
 			posts: postsByDate,
 			tags: uniqueTags,
 		},
