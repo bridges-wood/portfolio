@@ -1,29 +1,100 @@
+import { Link, styled } from '@nextui-org/react'
+import { NativeAttributes } from '@typings'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import React, { Children, ReactPortal } from 'react'
-import { NavLink as NavLinkBootstrap, NavLinkProps } from 'react-bootstrap'
+import { FC } from 'react'
 
-interface ComponentProps extends React.PropsWithChildren<NavLinkProps> {
-	activeClassName?: string
+interface Props {
+	href: string
+	pathname: string
+	title: string
+	selected: boolean
+	newPost?: boolean
+	updated?: boolean
+	comingSoon?: boolean
+	color?: string
 }
 
-const NavLink = ({ children, activeClassName, ...props }: ComponentProps) => {
-	// TODO figure out how to remove transition when link gains or loses active status
-	const { asPath } = useRouter()
+export type NavLinkProps = Props & NativeAttributes<Props>
 
-	const child = Children.only(children) as ReactPortal
-	const childClassName = child.props.className || ''
-	const isActive = asPath === props.href || asPath === props.as
+const BaseLink = styled(Link, {
+	d: 'flex',
+	textDecoration: 'none',
+	'@smMax': {
+		pt: 0,
+		pl: 0,
+		pb: 0,
+		d: 'flex',
+		ai: 'center',
+	},
+	'&:active': {
+		opacity: 0.7,
+	},
+	variants: {
+		selected: {
+			true: {
+				boxSizing: 'border-box',
+				fontWeight: '$semibold',
+				'@smMax': {
+					borderLeft: 'none',
+					pl: 0,
+				},
+			},
+		},
+		disabled: {
+			true: {
+				cursor: 'not-allowed',
+				pe: 'none',
+			},
+		},
+	},
+})
 
-	const className = isActive
-		? `${childClassName} ${activeClassName}`.trim()
-		: childClassName
+const NavLink: FC<NavLinkProps> = ({
+	href,
+	pathname,
+	title,
+	color,
+	selected,
+	comingSoon,
+	onClick,
+}) => {
+	const router = useRouter()
+	const onlyHashChange = pathname === router.pathname
+
+	if (onlyHashChange) {
+		return (
+			<BaseLink
+				href={pathname}
+				selected={selected}
+				disabled={comingSoon}
+				css={{
+					color: color ? color : 'inherit',
+				}}
+			>
+				{title}
+			</BaseLink>
+		)
+	}
 
 	return (
-		<NavLinkBootstrap {...props}>
-			{React.cloneElement(child, {
-				className: className || null,
-			})}
-		</NavLinkBootstrap>
+		<NextLink href={!comingSoon ? pathname || href : ''}>
+			<BaseLink
+				href={pathname}
+				selected={selected}
+				disabled={comingSoon}
+				onClick={(e: any) => {
+					if (!comingSoon && onClick) {
+						onClick(e)
+					}
+				}}
+				css={{
+					color: color ? color : 'inherit',
+				}}
+			>
+				{title}
+			</BaseLink>
+		</NextLink>
 	)
 }
 

@@ -1,12 +1,35 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+import { CssBaseline } from '@nextui-org/react'
+import Document, {
+	DocumentContext,
+	DocumentInitialProps,
+	Head,
+	Html,
+	Main,
+	NextScript,
+} from 'next/document'
 import React from 'react'
 
-class PortfolioDoc extends Document {
+class MyDocument extends Document {
+	static async getInitialProps(
+		ctx: DocumentContext
+	): Promise<DocumentInitialProps> {
+		const initialProps = await Document.getInitialProps(ctx)
+		return {
+			...initialProps,
+			styles: React.Children.toArray([initialProps.styles]),
+		}
+	}
+
 	render() {
 		return (
 			<Html>
-				<title>Max Wood</title>
 				<Head>
+					<style id='stitches' />
+					{CssBaseline.flush()}
+					<link
+						href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'
+						rel='stylesheet'
+					/>
 					<link rel='icon' href='/favicon.ico' />
 				</Head>
 				<body>
@@ -18,4 +41,4 @@ class PortfolioDoc extends Document {
 	}
 }
 
-export default PortfolioDoc
+export default MyDocument

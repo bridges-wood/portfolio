@@ -40,7 +40,7 @@ const useStoredState = <T>({
 		if (storedString !== null) {
 			setState(fromString(storedString))
 		}
-	}, [])
+	}, [fromString, key])
 
 	return [state, updateState]
 }

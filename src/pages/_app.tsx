@@ -1,21 +1,23 @@
-import Footer from '@components/Footer'
-import Navbar from '@components/Navbar'
+import { NextUIProvider } from '@nextui-org/react'
+import globalStyles, { darkTheme, lightTheme } from '@styles/global'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { AppComponent } from 'next/dist/shared/lib/router/router'
-import React from 'react'
-import '../scss/main.scss'
 
 const App: AppComponent = ({ Component, pageProps }) => {
-	// TODO avoid flashbang on rerender.
+	globalStyles()
 	return (
-		<>
-			<aside>
-				<Navbar />
-			</aside>
-			<main className='content'>
+		<NextThemesProvider
+			defaultTheme='system'
+			attribute='class'
+			value={{
+				light: lightTheme.className,
+				dark: darkTheme.className,
+			}}
+		>
+			<NextUIProvider>
 				<Component {...pageProps} />
-				<Footer />
-			</main>
-		</>
+			</NextUIProvider>
+		</NextThemesProvider>
 	)
 }
 

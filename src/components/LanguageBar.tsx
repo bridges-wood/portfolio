@@ -1,16 +1,28 @@
 import colors from '@json/colors'
-import { GithubProject } from '@typings/api/Projects'
-import React from 'react'
+import { CSS, styled } from '@nextui-org/react'
+import type { GithubProject } from '@typings/api/Projects'
+import { FC } from 'react'
 
-interface ComponentProps extends Pick<GithubProject, 'languages'> {}
+interface LanguageBarProps extends Pick<GithubProject, 'languages'> {
+	css?: CSS
+}
 
-const LanguageBar = ({ languages }: ComponentProps) => {
+const LanguageBarContainer = styled('span', {
+	d: 'flex',
+	overflow: 'hidden',
+	w: '100%',
+	h: '6px',
+	br: '$pill',
+	m: '$4 0',
+})
+
+const LanguageBar: FC<LanguageBarProps> = ({ languages, css }) => {
 	const totalBytes = Object.values(languages).reduce(
 		(total, bytes) => (total += bytes)
 	)
 
 	return (
-		<span className='languageBar'>
+		<LanguageBarContainer css={css}>
 			{Object.entries(languages).map(([language, bytes]) => (
 				<span
 					key={language}
@@ -22,7 +34,7 @@ const LanguageBar = ({ languages }: ComponentProps) => {
 					}}
 				/>
 			))}
-		</span>
+		</LanguageBarContainer>
 	)
 }
 

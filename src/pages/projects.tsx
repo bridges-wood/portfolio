@@ -1,74 +1,93 @@
-import FeaturedProjectPreview from '@components/FeaturedProjectPreview'
-import Project from '@components/Project'
-import useWindowDimensions from '@hooks/useWindowDimensions'
+import { FeaturedProject, Project } from '@components/projects'
 import featuredProjects from '@json/featuredProjects'
+import DefaultLayout from '@layouts/default'
+import { Container, Grid, Text } from '@nextui-org/react'
 import { GithubProject } from '@typings/api/Projects'
+import { FeaturedProject as FeaturedProjectType } from '@typings/FeaturedProject'
 import fetchProjects from '@utils/repos'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import React, { useEffect, useRef, useState } from 'react'
-import Slider, { Settings as SliderProps } from 'react-slick'
 
 interface PageProps {
 	projects: GithubProject[]
-	featured: any[]
+	featured: FeaturedProjectType[]
 }
 
-// TODO add buttons in vertical orientation.
-
 const Projects = ({ projects, featured }: PageProps) => {
-	const { width } = useWindowDimensions()
-	const [sliderProps, setSliderProps] = useState<SliderProps>({})
-	const sliderRef = useRef<Slider>()
-
-	useEffect(() => {
-		const commonProps: Partial<SliderProps> = {
-			infinite: true,
-			speed: 800,
-			autoplay: true,
-			autoplaySpeed: 5000,
-			onSwipe: () => {
-				sliderRef.current.slickPause()
-			},
-		}
-		if (width > 800) {
-			setSliderProps({
-				...commonProps,
-				arrows: false,
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				vertical: true,
-				verticalSwiping: true,
-			})
-		} else {
-			setSliderProps({
-				...commonProps,
-			})
-		}
-	}, [width])
-
 	return (
-		<div className='outer'>
+		<DefaultLayout>
 			<Head>
 				<title>Projects | Max Wood</title>
 			</Head>
-			<h1>Projects</h1>
-			<p>
-				A sample of some of the projects that I&apos;ve worked on for personal
-				projects, assignments and on freelance.
-			</p>
-			<div className='projects' id='container'>
+			<Container>
+				<Text h1>Projects</Text>
+			</Container>
+			<Container
+				css={{
+					'.preview': {
+						mb: '$12',
+						mt: '$12',
+					},
+					'.preview:nth-of-type(odd)': {
+						'@md': {
+							'.preview__image': {
+								order: 1,
+							},
+						},
+						'.preview__header': {
+							ai: 'flex-start',
+						},
+						'.preview__description-card': {
+							marginRight: '-10%',
+						},
+						'.preview__description': {
+							ta: 'left',
+						},
+						'.preview__tags': {
+							jc: 'flex-start',
+						},
+						'.preview__links': {
+							jc: 'flex-start',
+						},
+					},
+					'.preview:nth-of-type(even)': {
+						'@md': {
+							'.preview__image': {
+								order: 0,
+							},
+						},
+						'.preview__header': {
+							ai: 'flex-end',
+						},
+						'.preview__description-card': {
+							marginLeft: '-10%',
+						},
+						'.preview__description': {
+							ta: 'right',
+						},
+						'.preview__tags': {
+							jc: 'flex-end',
+						},
+						'.preview__links': {
+							jc: 'flex-end',
+						},
+					},
+				}}
+			>
 				{featured.map((project) => (
-					<FeaturedProjectPreview key={project.title} project={project} />
+					<FeaturedProject key={project.title} project={project} />
 				))}
 				<hr />
-				<Slider {...sliderProps} ref={sliderRef}>
-					{projects.map((project) => (
-						<Project key={project.id} project={project} />
+				<Text h2> Other Projects</Text>
+				<Grid.Container gap={2} justify='center'>
+					{projects.slice(0, 6).map((project) => (
+						<Grid key={project.id} xs={6} md={4}>
+							<Project project={project} />
+						</Grid>
 					))}
-				</Slider>
-			</div>
-		</div>
+				</Grid.Container>
+			</Container>
+		</DefaultLayout>
 	)
 }
 

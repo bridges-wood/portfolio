@@ -1,17 +1,15 @@
 ---
-title: Harry's Hot Tubs
+title: "My First Client - Harry's Hot Tubs"
+subtitle: How I went from 0 clients to my first freelance job within a year of learning React.
+coverImage: '/images/harrys-hot-tubs/isomorphic.png'
 isPublished: true
 date: '2021-09-15'
+author: Max Wood
+tags: ['Web Development', 'React', 'Next.js', 'Entrepreneurship', 'Freelancing']
 ---
 
-<div className='image-wrapper'>
-	<Image
-		src='/images/harrys-hot-tubs/harryshottubs.com_ (1).png'
-		width='1920'
-		height='1080'
-		priority='true'
-	/>
-</div>
+
+![Harry's Hot Tubs](/images/harrys-hot-tubs/isomorphic.png)
 
 As my very first freelance web development project, I created a website for a local
 hot tub company. Built using [Next.js](https://nextjs.org/), [React](https://reactjs.org/),
@@ -21,24 +19,11 @@ managers that allow them to track the status and availability of all their hot t
 
 I've learned a lot from this project, and I hope you'll find it some of what I have to share useful.
 
-## Table of Contents
-
-1. [About the Project](#about-the-project)
-2. [Architecture](#architecture)
-3. [Technologies Used](#technologies-used)
-4. [Deployment](#deployment)
-
 ## About the Project
 
 The client wanted something built extremely fast, so I got stuck into programming the site without the usual design review process that I usually go through. Looking at the first live version of the site, I think it shows; it's not very pretty, but it works.
 
-<div className='image-wrapper'>
-	<Image
-		src='/images/harrys-hot-tubs/harryshottubs.com (ISO).png'
-		width='1920'
-		height='1440'
-	/>
-</div>
+![Harry's Hot Tubs homepage](/images/harrys-hot-tubs/desktop2.png)
 
 Following this first version, most of the immediate work was focused on creating a comprehensive visual testing suite (using [Cypress](https://www.cypress.io/)) in addition to another suite of unit tests (using [Jest](https://jestjs.io/)) to catch any regressions in future work and make sure that the exisiting code was in line with the specification that the I had developed with the client to measure deliverables against.
 
@@ -50,11 +35,7 @@ Most recently, I was asked to redevelop the look and feel of the site, so I have
 
 ## Architecture
 
-The site is very simple, reflecting the needs of the client's business. The frontend and backend are both built using Next.js, leveraging [API Routes](https://nextjs.org/docs/api-routes/introduction) to bundle the whole application together within the same framework.
-
-By using the one framework, a great deal of the heavy lifting in terms of bundling, routing, and server-side rendering is taken care of, meaing that the site is blazing fast to load, and the code is very easy to read.
-
-The backend is RESTful, and mostly handles interfacing with the database.
+The site is very simple, reflecting the needs of the client's business. The frontend and backend are both built using Next.js, leveraging [API Routes](https://nextjs.org/docs/api-routes/introduction) to bundle the whole application together within the same framework. By using the one framework, a great deal of the heavy lifting in terms of bundling, routing, and server-side rendering is taken care of, meaing that the site is blazing fast to load, and the code is very easy to read. The backend is RESTful, and mostly handles interfacing with the database.
 
 ## Technologies Used
 

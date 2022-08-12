@@ -6,5 +6,7 @@ export interface FeaturedProject {
 		previewDesktop: string
 	}
 	description: string
+	tags: string[]
 	url?: string
+	github?: string
 }

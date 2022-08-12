@@ -1,59 +1,81 @@
 import AnchoredHeading from '@components/AnchoredHeading'
-import FrontMatter from '@typings/frontMatter'
-import { postFilePaths, POSTS_PATH } from '@utils/blog'
+import PostsLayout from '@layouts/posts'
+import { Link, Spacer, Text } from '@nextui-org/react'
+import { injectMetadata } from '@plugins'
+import FrontMatter from '@typings/Post'
+import { getHeadings, Heading } from '@utils/headings'
+import { postFilePaths, POSTS_PATH } from '@utils/posts'
 import fs from 'fs'
 import matter from 'gray-matter'
-import { GetStaticProps } from 'next'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import {
+	MDXRemote,
+	MDXRemoteProps,
+	MDXRemoteSerializeResult,
+} from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import Head from 'next/head'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import path from 'path'
+import unwrapImages from 'remark-unwrap-images'
 
 /**
- * Borrowed from: https://github.com/vercel/next.js/blob/canary/examples/with-mdx-remote/pages/posts/%5Bslug%5D.js
+ * @see https://github.com/vercel/next.js/blob/canary/examples/with-mdx-remote/pages/posts/%5Bslug%5D.js
  */
+const components: MDXRemoteProps['components'] = {
+	img: ({ src, alt, placeholder, style, ...props }) => (
+		<div
+			style={{
+				margin: '12px 0',
+			}}
+		>
+			<Image
+				src={src}
+				alt={alt}
+				layout='intrinsic'
+				loading='lazy'
+				placeholder={placeholder as ImageProps['placeholder']}
+				{...props}
+			/>
+		</div>
+	),
 
-const components: Record<string, React.ReactNode> = {
-	Head,
-	Image,
-	h1: (props: any) => <AnchoredHeading {...{ level: 1, ...props }} />,
-	h2: (props: any) => <AnchoredHeading {...{ level: 2, ...props }} />,
-	h3: (props: any) => <AnchoredHeading {...{ level: 3, ...props }} />,
-	h4: (props: any) => <AnchoredHeading {...{ level: 4, ...props }} />,
-	h5: (props: any) => <AnchoredHeading {...{ level: 5, ...props }} />,
-	h6: (props: any) => <AnchoredHeading {...{ level: 6, ...props }} />,
+	h1: (props) => <AnchoredHeading h1 {...props} />,
+	h2: (props) => <AnchoredHeading h2 {...props} />,
+	h3: (props) => <AnchoredHeading h3 {...props} />,
+	h4: (props) => <AnchoredHeading h4 {...props} />,
+	h5: (props) => <AnchoredHeading h5 {...props} />,
+	h6: (props) => <AnchoredHeading h6 {...props} />,
+	p: ({ children }) => <Text>{children}</Text>,
+	a: Link,
 }
 
 interface PageProps {
 	source: MDXRemoteSerializeResult<Record<string, unknown>>
 	frontMatter: FrontMatter
+	headings: Heading[]
 }
 
-const PostPage = ({ source, frontMatter }: PageProps) => (
-	<div className='post'>
+const PostPage = ({ source, frontMatter, headings }: PageProps) => (
+	<PostsLayout headings={headings}>
 		<Head>
-			<title>{frontMatter.title} | Max Wood</title>
-
-			<meta name='author' content='Max Wood' />
+			<title>{`${frontMatter.title} | ${frontMatter.author}`}</title>
+			<meta name='author' content={frontMatter.author} />
 			<meta property='og:title' content={frontMatter.title} />
 		</Head>
-		<div className='post-header'>
-			<h1>{frontMatter.title}</h1>
-			<small>
-				Published on {new Date(frontMatter.date).toLocaleDateString()}
-			</small>
-			{frontMatter.description && (
-				<p className='description'>{frontMatter.description}</p>
-			)}
-		</div>
-		<main className='post-body'>
-			<MDXRemote {...source} components={components} />
+		<Text h1>{frontMatter.title}</Text>
+		<Text small suppressHydrationWarning>
+			Published on {new Date(frontMatter.date).toLocaleDateString()}
+		</Text>
+		{frontMatter.description && <Text>{frontMatter.description}</Text>}
+		<Spacer y={0.5} />
+		<main>
+			<MDXRemote {...source} components={components} lazy />
 		</main>
-	</div>
+	</PostsLayout>
 )
 
-export const getStaticProps: GetStaticProps<any> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 	const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`)
 	const source = fs.readFileSync(postFilePath)
 
@@ -62,19 +84,24 @@ export const getStaticProps: GetStaticProps<any> = async ({ params }) => {
 	if (!data.isPublished)
 		return { redirect: { statusCode: 302, destination: '/' } }
 
-	const mdxSource = await serialize(content, {
+	const mdxSource = await serialize(content.toString(), {
 		scope: data,
+		mdxOptions: {
+			rehypePlugins: [injectMetadata],
+			remarkPlugins: [unwrapImages],
+		},
 	})
 
 	return {
 		props: {
 			source: mdxSource,
-			frontMatter: data,
+			frontMatter: data as FrontMatter,
+			headings: getHeadings(source.toString()),
 		},
 	}
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = postFilePaths
 		// Remove file extensions for page paths
 		.map((path) => path.replace(/\.mdx?$/, ''))

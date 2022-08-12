@@ -1,15 +1,24 @@
-import Link from 'next/link'
-import React from 'react'
+import AnimatedLink from '@components/AnimatedLink'
+import { Col, Container, Row, Text } from '@nextui-org/react'
+import { useRouter } from 'next/router'
 
 const NotFoundPage = () => {
+	const router = useRouter()
+
 	return (
-		<div className='error-page'>
-			<h1>404</h1>
-			<div className='error-message'>
-				<h2>This page does not exist.</h2>
-				<Link href='/'>Go back</Link>
-			</div>
-		</div>
+		<Container fluid dir='row' className='error-page'>
+			<Row>
+				<Col>
+					<Text h1>404</Text>
+				</Col>
+				<Col className='error-message'>
+					<Text h2>This page does not exist.</Text>
+					<AnimatedLink onClick={() => router.back()} icon={false}>
+						Go back
+					</AnimatedLink>
+				</Col>
+			</Row>
+		</Container>
 	)
 }
 

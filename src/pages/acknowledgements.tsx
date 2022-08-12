@@ -1,24 +1,30 @@
+import AnimatedLink from '@components/AnimatedLink'
+import DefaultLayout from '@layouts/default'
+import { Text } from '@nextui-org/react'
 import Head from 'next/head'
-import React from 'react'
 
 const Acknowledgements = () => {
 	return (
-		<div>
+		<DefaultLayout>
 			<Head>
 				<title>Acknowledgements | Max Wood</title>
 			</Head>
-			<h1>Acknowledgements</h1>
-			<div>
-				I&apos;d like to acknowledge the following for their contributions to
-				this site.
-			</div>
-			<ul>
-				<li>
-					<a href='https://fontawesome.com/license'>Font Awesome</a>, for their
-					outstanding free icons.
-				</li>
-			</ul>
-		</div>
+			<section>
+				<Text h1>Acknowledgements</Text>
+				<div>
+					I&apos;d like to acknowledge the following for their contributions to
+					this site.
+				</div>
+				<ul>
+					<li>
+						<AnimatedLink icon={false} href='https://jrgarciadev.com/'>
+							Junior Garcia
+						</AnimatedLink>
+						, for his awesome NextUI library.
+					</li>
+				</ul>
+			</section>
+		</DefaultLayout>
 	)
 }
 

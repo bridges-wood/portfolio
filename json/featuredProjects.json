@@ -2,10 +2,25 @@
 	{
 		"title": "Harry's Hot Tubs Booking Site",
 		"url": "https://harryshottubs.com",
+		"description": "Hot tub booking website with integrated payment and internal order management dashboard. My first foray into professional web development.",
 		"images": {
-			"previewMobile": "/images/harrys-hot-tubs/harryshottubs.com_(iPhone%20X).png",
-			"previewTablet": "/images/harrys-hot-tubs/harryshottubs.com_(iPad).png",
-			"previewDesktop": "/images/harrys-hot-tubs/harryshottubs.com_.png"
-		}
+			"previewMobile": "/images/harrys-hot-tubs/iPhone X.png",
+			"previewTablet": "/images/harrys-hot-tubs/iPad.png",
+			"previewDesktop": "/images/harrys-hot-tubs/desktop1.png"
+		},
+		"tags": ["Next.js", "Web Design", "Freelance"],
+		"github": "https://github.com/harrys-hot-tubs/HHT"
+	},
+	{
+		"title": "Shuttl",
+		"url": "https://shuttl.maxwood.tech",
+		"description": "A blog website about the history of the space shuttle program, through the lens of the music played on each flight.",
+		"images": {
+			"previewMobile": "/images/shuttl/iPhone 12 Pro.png",
+			"previewTablet": "/images/shuttl/iPad Air.png",
+			"previewDesktop": "/images/shuttl/desktop.png"
+		},
+		"tags": ["Next.js", "Web Design", "Music"],
+		"github": "https://github.com/bridges-wood/shuttl"
 	}
 ]

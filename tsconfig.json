@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "ESNext",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -16,12 +16,18 @@
 		"baseUrl": "./src",
 		"paths": {
 			"@components/*": ["components/*"],
+			"@layouts/*": ["layouts/*"],
 			"@hooks/*": ["hooks/*"],
 			"@pages/*": ["pages/*"],
 			"@typings/*": ["typings/*"],
 			"@utils/*": ["utils/*"],
-			"@json/*": ["../json/*.json"]
-		}
+			"@*": ["*"],
+			"@lib/*": ["lib/*"],
+			"@json/*": ["../json/*.json"],
+			"@styles/*": ["styles/*"],
+			"@plugins/*": ["plugins/*"]
+		},
+		"incremental": true
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"]
