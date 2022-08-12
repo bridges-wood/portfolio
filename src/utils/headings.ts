@@ -5,15 +5,18 @@ export interface Heading {
 	slug: string
 }
 
-export const getHeadings = (): Heading[] => {
-	const headings = document.getElementsByClassName(
-		'linked-heading'
-	) as HTMLCollection
+export const getHeadings = (source: string): Heading[] => {
+	// Get all h1-h6 headings
+	const headingLines = source.split('\n').filter((e) => e.startsWith('#'))
 
-	return Array.from(headings).map((e: HTMLHtmlElement) => {
+	// Get the text and slug of each heading
+	return headingLines.map((raw) => {
+		const text = raw.replace(/^#+\s*/, '')
+		const slug = slugify(text)
+
 		return {
-			text: e.getAttribute('data-name'),
-			slug: slugify(e.getAttribute('data-name')),
+			text,
+			slug,
 		}
-	}) as Heading[]
+	})
 }

@@ -3,6 +3,7 @@ import PostsLayout from '@layouts/posts'
 import { Link, Spacer, Text } from '@nextui-org/react'
 import { injectMetadata } from '@plugins'
 import FrontMatter from '@typings/Post'
+import { getHeadings, Heading } from '@utils/headings'
 import { postFilePaths, POSTS_PATH } from '@utils/posts'
 import fs from 'fs'
 import matter from 'gray-matter'
@@ -52,10 +53,11 @@ const components: MDXRemoteProps['components'] = {
 interface PageProps {
 	source: MDXRemoteSerializeResult<Record<string, unknown>>
 	frontMatter: FrontMatter
+	headings: Heading[]
 }
 
-const PostPage = ({ source, frontMatter }: PageProps) => (
-	<PostsLayout>
+const PostPage = ({ source, frontMatter, headings }: PageProps) => (
+	<PostsLayout headings={headings}>
 		<Head>
 			<title>{`${frontMatter.title} | ${frontMatter.author}`}</title>
 			<meta name='author' content={frontMatter.author} />
@@ -73,7 +75,7 @@ const PostPage = ({ source, frontMatter }: PageProps) => (
 	</PostsLayout>
 )
 
-export const getStaticProps: GetStaticProps<any> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 	const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`)
 	const source = fs.readFileSync(postFilePath)
 
@@ -93,7 +95,8 @@ export const getStaticProps: GetStaticProps<any> = async ({ params }) => {
 	return {
 		props: {
 			source: mdxSource,
-			frontMatter: data,
+			frontMatter: data as FrontMatter,
+			headings: getHeadings(source.toString()),
 		},
 	}
 }

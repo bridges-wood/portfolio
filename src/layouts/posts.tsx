@@ -4,8 +4,8 @@ import TableOfContents from '@components/TableOfContents'
 import { Route } from '@lib/page'
 import { Col, Container, Row } from '@nextui-org/react'
 import FrontMatter from '@typings/Post'
-import { getHeadings, Heading } from '@utils/headings'
-import { FC, PropsWithChildren, useEffect, useState } from 'react'
+import { Heading } from '@utils/headings'
+import { FC, PropsWithChildren } from 'react'
 import Footer from './Footer'
 import { DefaultRoutes } from './index'
 import Navbar from './Navbar'
@@ -18,6 +18,7 @@ export interface PostsLayoutProps {
 	meta?: FrontMatter
 	tag?: string
 	slug?: string
+	headings?: Heading[]
 	includeTableOfContents?: boolean
 }
 
@@ -30,13 +31,14 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 	meta,
 	tag,
 	slug,
+	headings = [],
 	includeTableOfContents = true,
 }) => {
-	const [headings, setHeadings] = useState<Heading[]>([])
+	// const [headings, setHeadings] = useState<Heading[]>([])
 
-	useEffect(() => {
-		setHeadings(getHeadings())
-	}, [])
+	// useEffect(() => {
+	// 	setHeadings(() => getHeadings())
+	// }, [])
 
 	return (
 		<div id='app-container'>
@@ -71,7 +73,7 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 						},
 					}}
 				>
-					{includeTableOfContents ? (
+					{includeTableOfContents && headings.length > 0 ? (
 						<Col
 							css={{
 								w: '32%',

@@ -3,13 +3,14 @@ import featuredProjects from '@json/featuredProjects'
 import DefaultLayout from '@layouts/default'
 import { Container, Grid, Text } from '@nextui-org/react'
 import { GithubProject } from '@typings/api/Projects'
+import { FeaturedProject as FeaturedProjectType } from '@typings/FeaturedProject'
 import fetchProjects from '@utils/repos'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 interface PageProps {
 	projects: GithubProject[]
-	featured: any[]
+	featured: FeaturedProjectType[]
 }
 
 const Projects = ({ projects, featured }: PageProps) => {
@@ -36,6 +37,9 @@ const Projects = ({ projects, featured }: PageProps) => {
 						'.preview__header': {
 							ai: 'flex-start',
 						},
+						'.preview__description-card': {
+							marginRight: '-10%',
+						},
 						'.preview__description': {
 							ta: 'left',
 						},
@@ -54,6 +58,9 @@ const Projects = ({ projects, featured }: PageProps) => {
 						},
 						'.preview__header': {
 							ai: 'flex-end',
+						},
+						'.preview__description-card': {
+							marginLeft: '-10%',
 						},
 						'.preview__description': {
 							ta: 'right',
