@@ -10,5 +10,17 @@
 		},
 		"tags": ["Next.js", "Web Design", "Freelance"],
 		"github": "https://github.com/harrys-hot-tubs/HHT"
+	},
+	{
+		"title": "Shuttl",
+		"url": "https://shuttl.maxwood.tech",
+		"description": "A blog website about the history of the space shuttle program, through the lens of the music played on each flight.",
+		"images": {
+			"previewMobile": "/images/shuttl/iPhone 12 Pro.png",
+			"previewTablet": "/images/shuttl/iPad Air.png",
+			"previewDesktop": "/images/shuttl/desktop.png"
+		},
+		"tags": ["Next.js", "Web Design", "Music"],
+		"github": "https://github.com/bridges-wood/shuttl"
 	}
 ]

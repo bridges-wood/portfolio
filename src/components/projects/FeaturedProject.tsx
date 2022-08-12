@@ -1,4 +1,5 @@
 import { Github, LinkExternal } from '@components/icons'
+import { useBreakpoint } from '@hooks'
 import { Card, Col, Image, Row, Text, useTheme } from '@nextui-org/react'
 import type { FeaturedProject as FeatureProjectData } from '@typings/FeaturedProject'
 import Link from 'next/link'
@@ -18,6 +19,7 @@ const FeaturedProject: FC<FeaturedProjectProps> = ({
 		tags,
 	},
 }) => {
+	const isMd = useBreakpoint('md')
 	const { theme } = useTheme()
 
 	return (
@@ -42,7 +44,7 @@ const FeaturedProject: FC<FeaturedProjectProps> = ({
 					},
 				}}
 				css={{
-					filter: 'opacity(0.25)',
+					filter: `opacity(${isMd ? 1 : 0.35})`,
 					aspectRatio: '16/9',
 				}}
 				height={384}
@@ -91,11 +93,13 @@ const FeaturedProject: FC<FeaturedProjectProps> = ({
 				</Text>
 
 				<Card
+					className='preview__description-card'
 					css={{
 						'@md': {
 							width: '80ch',
 						},
-						maxWidth: '100%',
+						zIndex: 2,
+						maxWidth: '110%',
 						'@mdMax': {
 							backgroundColor: 'transparent',
 						},
