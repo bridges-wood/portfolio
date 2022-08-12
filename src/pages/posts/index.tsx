@@ -105,6 +105,7 @@ const Index = ({ posts, tags, featured }: PageProps) => {
 
 								'@smMax': {
 									display: 'flex',
+									width: '100%',
 								},
 							}}
 							as='aside'
