@@ -1,7 +1,7 @@
 import type { Element, Node } from 'hast'
 import imageSize from 'image-size'
 import { ISizeCalculationResult } from 'image-size/dist/types/interface'
-import path from 'path'
+import { join } from 'path'
 import { getPlaiceholder } from 'plaiceholder'
 import { visit } from 'unist-util-visit'
 import { promisify } from 'util'
@@ -39,7 +39,7 @@ const addProps = async (node: ImageNode) => {
 	const isExternal = node.properties.src.startsWith('http')
 
 	if (!isExternal) {
-		res = await sizeOf(path.join(process.cwd(), 'public', node.properties.src))
+		res = await sizeOf(join(process.cwd(), 'public', node.properties.src))
 		blur64 = (await getPlaiceholder(node.properties.src)).base64
 	} else {
 		const imageRes = await fetch(node.properties.src)

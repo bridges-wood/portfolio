@@ -8,7 +8,7 @@ import { readFileSync } from 'fs'
 import matter from 'gray-matter'
 import _ from 'lodash'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import path from 'path'
+import { join } from 'path'
 import { FC, useState } from 'react'
 
 interface TagPageProps {
@@ -132,7 +132,7 @@ export const getStaticProps: GetStaticProps<TagPageProps> = async ({
 export const getStaticPaths: GetStaticPaths = async () => {
 	const tags = postFilePaths
 		.map((postFileName) => {
-			const qualifiedPath = path.join(POSTS_PATH, postFileName)
+			const qualifiedPath = join(POSTS_PATH, postFileName)
 			const source = readFileSync(qualifiedPath)
 			const { data } = matter(source)
 
