@@ -5,7 +5,7 @@ import { injectMetadata } from '@plugins'
 import FrontMatter from '@typings/Post'
 import { getHeadings, Heading } from '@utils/headings'
 import { postFilePaths, POSTS_PATH } from '@utils/posts'
-import fs from 'fs'
+import { readFileSync } from 'fs'
 import matter from 'gray-matter'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import {
@@ -16,7 +16,7 @@ import {
 import { serialize } from 'next-mdx-remote/serialize'
 import Head from 'next/head'
 import Image, { ImageProps } from 'next/image'
-import path from 'path'
+import { join } from 'path'
 import unwrapImages from 'remark-unwrap-images'
 
 /**
@@ -76,8 +76,8 @@ const PostPage = ({ source, frontMatter, headings }: PageProps) => (
 )
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
-	const postFilePath = path.join(POSTS_PATH, `${params.slug}.mdx`)
-	const source = fs.readFileSync(postFilePath)
+	const postFilePath = join(POSTS_PATH, `${params.slug}.mdx`)
+	const source = readFileSync(postFilePath)
 
 	const { content, data } = matter(source)
 
@@ -103,10 +103,21 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = postFilePaths
-		// Remove file extensions for page paths
-		.map((path) => path.replace(/\.mdx?$/, ''))
-		// Map the path into the static paths object required by Next.js
-		.map((slug) => ({ params: { slug } }))
+		.map((filePath) => {
+			const postFilePath = join(POSTS_PATH, filePath)
+			const { data } = matter(readFileSync(postFilePath))
+			const isPublished: boolean = data.isPublished
+			return {
+				filePath,
+				isPublished,
+			}
+		})
+		// Filter out unpublished posts
+		.filter(({ isPublished }) => isPublished)
+		// Map to paths
+		.map(({ filePath }) => ({
+			params: { slug: filePath.replace(/\.mdx$/, '') },
+		}))
 
 	return { paths, fallback: false }
 }
