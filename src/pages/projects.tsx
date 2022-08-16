@@ -60,7 +60,9 @@ const Projects = ({ projects, featured }: PageProps) => {
 							ai: 'flex-end',
 						},
 						'.preview__description-card': {
-							marginLeft: '-10%',
+							'@md': {
+								marginLeft: '-10%',
+							},
 						},
 						'.preview__description': {
 							ta: 'right',
@@ -81,7 +83,7 @@ const Projects = ({ projects, featured }: PageProps) => {
 				<Text h2> Other Projects</Text>
 				<Grid.Container gap={2} justify='center'>
 					{projects.slice(0, 6).map((project) => (
-						<Grid key={project.id} xs={6} md={4}>
+						<Grid key={project.id} xs={12} sm={6} md={4}>
 							<Project project={project} />
 						</Grid>
 					))}
