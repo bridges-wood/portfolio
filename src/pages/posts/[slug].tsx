@@ -48,9 +48,18 @@ const components: MDXRemoteProps['components'] = {
 	h6: (props) => <AnchoredHeading h6 {...props} />,
 	p: ({ children }) => <Text>{children}</Text>,
 	a: ({ children, ...props }) => (
-		<Link {...props} color='inherit'>
-			{children}
-		</Link>
+		<span>
+			<Link
+				{...props}
+				color='primary'
+				isExternal
+				css={{
+					display: 'inline-flex',
+				}}
+			>
+				{children}
+			</Link>
+		</span>
 	),
 }
 
