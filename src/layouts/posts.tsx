@@ -34,12 +34,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 	headings = [],
 	includeTableOfContents = true,
 }) => {
-	// const [headings, setHeadings] = useState<Heading[]>([])
-
-	// useEffect(() => {
-	// 	setHeadings(() => getHeadings())
-	// }, [])
-
 	return (
 		<div id='app-container'>
 			<Navbar routes={routes} />
@@ -99,7 +93,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 					<Col
 						className='posts__center'
 						css={{
-							zIndex: '$10',
 							m: '0 $4 0 $4',
 							maxW: '100%',
 							overflow: 'auto',

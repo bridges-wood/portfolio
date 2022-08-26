@@ -68,7 +68,13 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 				</NextNavbar.Link>
 				<ThemeToggle />
 			</NextNavbar.Content>
-			<NextNavbar.Collapse>
+			<NextNavbar.Collapse
+				css={{
+					ul: {
+						overflowY: 'hidden',
+					},
+				}}
+			>
 				<NextNavbar.CollapseItem isActive={router.asPath === '/posts'}>
 					<AnimatedLink
 						href='/posts'
