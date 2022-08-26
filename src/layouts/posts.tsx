@@ -67,10 +67,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 						'@lg': {
 							pt: '1rem',
 						},
-						minHeight: 'calc(100vh - 76px)',
-						'@xsMax': {
-							minHeight: 'calc(100vh - 64px)',
-						},
 					}}
 				>
 					{includeTableOfContents && headings.length > 0 ? (
@@ -87,7 +83,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 								offset={92}
 								className='posts__left-sidebar'
 								css={{
-									maxH: 'calc(100vh - 4rem)',
 									overflow: 'auto',
 									zIndex: '$2',
 									pb: '$28',

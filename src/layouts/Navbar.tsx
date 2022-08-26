@@ -1,26 +1,10 @@
 import AnimatedLink from '@components/AnimatedLink'
-import { Github, Gmail, LinkedIn } from '@components/icons'
 import Logo from '@components/Logo'
-import MenuToggle from '@components/MenuToggle'
-import { Box } from '@components/primitives'
 import ThemeToggle from '@components/ThemeToggle'
-import { useIsMobile, useScrollPosition } from '@hooks'
 import { Route } from '@lib/page'
-import {
-	Col,
-	Container,
-	CSS,
-	Link,
-	Row,
-	Spacer,
-	useBodyScroll,
-	useTheme,
-} from '@nextui-org/react'
-import dynamic from 'next/dynamic'
+import { Navbar as NextNavbar, Spacer, useTheme } from '@nextui-org/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { StyledNavContainer, StyledNavMainContainer } from './styles'
 
 export interface ComponentProps {
 	routes?: Route[]
@@ -28,265 +12,110 @@ export interface ComponentProps {
 	isHome?: boolean
 }
 
-const MobileNavigation = dynamic(
-	() => import('@components/mobile-navigation/MobileNavigation'),
-	{
-		ssr: false,
-	}
-)
-
-const SocialLinkCSS: CSS = {
-	m: '0 6px',
-	'& svg': {
-		transition: '$default',
-	},
-	'&:hover': {
-		'& svg': {
-			opacity: 0.7,
-		},
-	},
-}
-
 const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 	const router = useRouter()
-	const { theme } = useTheme()
-	const [expanded, setExpanded] = useState(false)
-	const isMobile = useIsMobile()
-	const [bodyHidden, setBodyHidden] = useBodyScroll(null, { scrollLayer: true })
-	const scrollPosition = useScrollPosition()
-
-	const detached = hasNotify ? scrollPosition > 30 : scrollPosition > 0
-	const showBlur = !!expanded || !!detached || isHome
-
-	useEffect(() => {
-		if (!isMobile) {
-			setExpanded(false)
-			setBodyHidden(false)
-		}
-	}, [isMobile, setBodyHidden])
-
-	const onToggleNavigation = () => {
-		setExpanded(!expanded)
-
-		if (isMobile) {
-			setBodyHidden(!expanded)
-		}
-	}
+	const { isDark } = useTheme()
 
 	return (
-		<StyledNavMainContainer id='navbar-container'>
-			<StyledNavContainer detached={detached} showBlur={showBlur}>
-				<Container lg as='nav' display='flex' wrap='nowrap' alignItems='center'>
-					<Col
-						className='navbar__logo-container'
+		<NextNavbar
+			variant='sticky'
+			isBordered={isDark}
+			shouldHideOnScroll={
+				router.asPath === '/posts' || router.asPath === '/projects'
+			}
+		>
+			<Spacer
+				x={1}
+				css={{
+					'@sm': {
+						display: 'none',
+					},
+				}}
+			/>
+			<NextNavbar.Brand>
+				<NextLink href='/' passHref>
+					<a>
+						<Logo />
+					</a>
+				</NextLink>
+			</NextNavbar.Brand>
+			<NextNavbar.Toggle showIn='sm' />
+			<NextNavbar.Content
+				hideIn='sm'
+				enableCursorHighlight
+				variant='underline-rounded'
+			>
+				<NextNavbar.Link isActive={router.asPath === '/posts'} href='/posts'>
+					Blog
+				</NextNavbar.Link>
+				<NextNavbar.Link
+					isActive={router.asPath === '/projects'}
+					href='/projects'
+				>
+					Projects
+				</NextNavbar.Link>
+				<NextNavbar.Link
+					isActive={router.asPath === '/contact'}
+					href='/contact'
+				>
+					Contact
+				</NextNavbar.Link>
+				<NextNavbar.Link
+					isActive={router.asPath === '/acknowledgements'}
+					href='/acknowledgements'
+				>
+					Acknowledgements
+				</NextNavbar.Link>
+				<ThemeToggle />
+			</NextNavbar.Content>
+			<NextNavbar.Collapse>
+				<NextNavbar.CollapseItem isActive={router.asPath === '/posts'}>
+					<AnimatedLink
+						href='/posts'
 						css={{
-							height: '40px',
-							'@mdMax': {
-								width: '100',
-							},
+							color: 'inherit',
 						}}
 					>
-						<Row justify='flex-start' align='center'>
-							<NextLink href='/'>
-								<Link href='/'>
-									<Logo
-										height={40}
-										width={40}
-										className='navbar__logo'
-										css={{
-											cursor: 'pointer',
-											transition: '$default',
-										}}
-									/>
-								</Link>
-							</NextLink>
-						</Row>
-					</Col>
-					<Col
-						className='navbar__resources-container'
+						Blog
+					</AnimatedLink>
+				</NextNavbar.CollapseItem>
+				<NextNavbar.CollapseItem isActive={router.asPath === '/projects'}>
+					<AnimatedLink
+						href='/projects'
 						css={{
-							'@smMax': {
-								d: 'none',
-							},
+							color: 'inherit',
 						}}
 					>
-						<Row justify='center' align='center'>
-							<Spacer x={1} y={0} />
-							<AnimatedLink
-								icon={false}
-								href='/posts'
-								className='navbar__link'
-								title='Blog'
-								css={{
-									color: '$text',
-									'&.active': {
-										fontWeight: '600',
-										color: '$primary',
-									},
-								}}
-							>
-								Blog
-							</AnimatedLink>
-							<Spacer x={1} y={0} />
-							<AnimatedLink
-								icon={false}
-								href='/projects'
-								className='navbar__link'
-								title='Projects'
-								css={{
-									color: '$text',
-									'&.active': {
-										fontWeight: '600',
-										color: '$primary',
-									},
-								}}
-							>
-								Projects
-							</AnimatedLink>
-							<Spacer x={1} y={0} />
-
-							<AnimatedLink
-								icon={false}
-								href='/contact'
-								className='navbar__link'
-								title='Contact'
-								css={{
-									color: '$text',
-									'&.active': {
-										fontWeight: '600',
-										color: '$primary',
-									},
-								}}
-							>
-								Contact
-							</AnimatedLink>
-							<Spacer x={1} y={0} />
-							<AnimatedLink
-								icon={false}
-								href='/acknowledgements'
-								className='navbar__link'
-								title='Acknowledgements'
-								css={{
-									color: '$text',
-									'&.active': {
-										fontWeight: '600',
-										color: '$primary',
-									},
-								}}
-							>
-								Acknowledgements
-							</AnimatedLink>
-						</Row>
-					</Col>
-					<Col>
-						<Row
-							className='navbar__social-icons-container'
-							justify='flex-end'
-							align='center'
-							gap={1}
-							css={{
-								width: 'initial',
-								'@smMax': {
-									d: 'none',
-								},
-							}}
-						>
-							<Link
-								className='navbar_social-icon'
-								href='https://github.com/bridges-wood'
-								target='_blank'
-								rel='noreferrer'
-								css={SocialLinkCSS}
-							>
-								<Github size={24} fill={theme.colors.foreground.value} />
-							</Link>
-							<Link
-								className='navbar_social-icon'
-								href='https://www.linkedin.com/in/max-wood-181140182/'
-								target='_blank'
-								rel='noreferrer'
-								css={SocialLinkCSS}
-							>
-								<LinkedIn size={24} fill={theme.colors.foreground.value} />
-							</Link>
-							<Link
-								className='navbar_social-icon'
-								href='mailto:bridges.wood@gmail.com'
-								target='_blank'
-								rel='noreferrer'
-								css={SocialLinkCSS}
-							>
-								<Gmail size={24} fill={theme.colors.foreground.value} />
-							</Link>
-							<ThemeToggle
-								className='navbar_social-icon'
-								css={{
-									m: '0 6px',
-									'& svg': {
-										transition: '$default',
-									},
-									'&:hover': {
-										'& svg': {
-											opacity: 0.7,
-										},
-									},
-								}}
-							/>
-						</Row>
-					</Col>
-					<Col
-						className='navbar__menu-container'
+						Projects
+					</AnimatedLink>
+				</NextNavbar.CollapseItem>
+				<NextNavbar.CollapseItem isActive={router.asPath === '/contact'}>
+					<AnimatedLink
+						href='/contact'
 						css={{
-							size: '100%',
-							display: 'none',
-							'@smMax': {
-								display: 'flex',
-								justifyContent: 'flex-end',
-							},
+							color: 'inherit',
 						}}
 					>
-						<ThemeToggle
-							className='navbar__social-icon-mobile'
-							css={{
-								m: '0',
-
-								mt: '3px',
-								mr: '6px',
-							}}
-						/>
-						<Box
-							className='navbar__menu-arrow noselect'
-							onClick={() => {
-								onToggleNavigation()
-							}}
-							css={{
-								height: '100%',
-								minHeight: '30px',
-								mt: '5px',
-								mb: '5px',
-								minWidth: '30px',
-								display: 'flex',
-								justifyContent: 'flex-end',
-								alignItems: 'center',
-								cursor: 'pointer',
-							}}
-						>
-							<MenuToggle expanded={expanded} />
-						</Box>
-					</Col>
-					<MobileNavigation
-						hasNotify={hasNotify}
-						routes={routes}
-						opened={expanded}
-						detached={detached}
-						onClose={() => {
-							setExpanded(false)
-							setBodyHidden(false)
+						Contact
+					</AnimatedLink>
+				</NextNavbar.CollapseItem>
+				<NextNavbar.CollapseItem
+					isActive={router.asPath === '/acknowledgements'}
+				>
+					<AnimatedLink
+						href='/acknowledgements'
+						css={{
+							color: 'inherit',
 						}}
-					/>
-				</Container>
-			</StyledNavContainer>
-		</StyledNavMainContainer>
+					>
+						Acknowledgements
+					</AnimatedLink>
+				</NextNavbar.CollapseItem>
+				<NextNavbar.CollapseItem>
+					<ThemeToggle />
+				</NextNavbar.CollapseItem>
+			</NextNavbar.Collapse>
+		</NextNavbar>
 	)
 }
 

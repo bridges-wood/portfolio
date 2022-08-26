@@ -87,7 +87,7 @@ const Index = ({ posts, tags, featured }: PageProps) => {
 								<Text small css={{ m: '0 auto', color: '$accents6' }}>
 									⋮
 								</Text>
-								<Text small css={{ m: '0 auto', color: '$accents6' }}>
+								<Text small css={{ m: '$2 auto $5 auto', color: '$accents6' }}>
 									That&apos;s all there is to see, so far.
 								</Text>
 							</Col>

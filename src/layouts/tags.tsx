@@ -6,7 +6,7 @@ import Footer from './Footer'
 import { DefaultRoutes } from './index'
 import Navbar from './Navbar'
 
-export interface TagsLayouProps {
+export interface TagsLayoutProps {
 	routes?: Route[]
 	currentRoute?: Route
 	prevRoute?: Route
@@ -16,7 +16,7 @@ export interface TagsLayouProps {
 	slug?: string
 }
 
-const TagsLayout: FC<PropsWithChildren<TagsLayouProps>> = ({
+const TagsLayout: FC<PropsWithChildren<TagsLayoutProps>> = ({
 	children,
 	routes = DefaultRoutes,
 }) => {

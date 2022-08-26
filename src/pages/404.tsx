@@ -13,9 +13,7 @@ const NotFoundPage = () => {
 				</Col>
 				<Col className='error-message'>
 					<Text h2>This page does not exist.</Text>
-					<AnimatedLink onClick={() => router.back()} icon={false}>
-						Go back
-					</AnimatedLink>
+					<AnimatedLink onClick={() => router.back()}>Go back</AnimatedLink>
 				</Col>
 			</Row>
 		</Container>
