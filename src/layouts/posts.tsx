@@ -34,12 +34,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 	headings = [],
 	includeTableOfContents = true,
 }) => {
-	// const [headings, setHeadings] = useState<Heading[]>([])
-
-	// useEffect(() => {
-	// 	setHeadings(() => getHeadings())
-	// }, [])
-
 	return (
 		<div id='app-container'>
 			<Navbar routes={routes} />
@@ -67,10 +61,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 						'@lg': {
 							pt: '1rem',
 						},
-						minHeight: 'calc(100vh - 76px)',
-						'@xsMax': {
-							minHeight: 'calc(100vh - 64px)',
-						},
 					}}
 				>
 					{includeTableOfContents && headings.length > 0 ? (
@@ -87,7 +77,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 								offset={92}
 								className='posts__left-sidebar'
 								css={{
-									maxH: 'calc(100vh - 4rem)',
 									overflow: 'auto',
 									zIndex: '$2',
 									pb: '$28',
@@ -104,7 +93,6 @@ const PostsLayout: FC<PropsWithChildren<PostsLayoutProps>> = ({
 					<Col
 						className='posts__center'
 						css={{
-							zIndex: '$10',
 							m: '0 $4 0 $4',
 							maxW: '100%',
 							overflow: 'auto',

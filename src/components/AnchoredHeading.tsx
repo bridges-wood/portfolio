@@ -53,11 +53,11 @@ const AnchoredHeading: FC<AnchoredHeadingProps> = ({ children, ...props }) => {
 		h6,
 	}: AnchoredHeadingProps): string | number => {
 		if (h1) {
-			return theme.fontSizes.xl5.value
+			return theme.fontSizes['5xl'].value
 		} else if (h2) {
-			return theme.fontSizes.xl4.value
+			return theme.fontSizes['4xl'].value
 		} else if (h3) {
-			return theme.fontSizes.xl2.value
+			return theme.fontSizes['2xl'].value
 		} else if (h4) {
 			return theme.fontSizes.xl.value
 		} else if (h5) {

@@ -17,7 +17,7 @@ const Acknowledgements = () => {
 				</div>
 				<ul>
 					<li>
-						<AnimatedLink icon={false} href='https://jrgarciadev.com/'>
+						<AnimatedLink href='https://jrgarciadev.com/'>
 							Junior Garcia
 						</AnimatedLink>
 						, for his awesome NextUI library.
