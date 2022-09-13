@@ -46,7 +46,15 @@ const components: MDXRemoteProps['components'] = {
 	h4: (props) => <AnchoredHeading h4 {...props} />,
 	h5: (props) => <AnchoredHeading h5 {...props} />,
 	h6: (props) => <AnchoredHeading h6 {...props} />,
-	p: ({ children }) => <Text>{children}</Text>,
+	p: ({ children }) => (
+		<Text
+			css={{
+				textAlign: 'justify',
+			}}
+		>
+			{children}
+		</Text>
+	),
 	a: ({ children, ...props }) => (
 		<span>
 			<Link
@@ -94,7 +102,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 
 	const { content, data } = matter(source)
 
-	if (!data.isPublished)
+	if (!data.isPublished && process.env.NODE_ENV === 'production')
 		return { redirect: { statusCode: 302, destination: '/' } }
 
 	const mdxSource = await serialize(content.toString(), {
@@ -126,7 +134,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			}
 		})
 		// Filter out unpublished posts
-		.filter(({ isPublished }) => isPublished)
+		.filter(
+			({ isPublished }) => isPublished || process.env.NODE_ENV !== 'production'
+		)
 		// Map to paths
 		.map(({ filePath }) => ({
 			params: { slug: filePath.replace(/\.mdx$/, '') },

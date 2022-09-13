@@ -217,7 +217,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 		// All remote posts are published by default
 		if (!post.isLocal) return true
 
-		return post.isPublished
+		return post.isPublished || process.env.NODE_ENV !== 'production'
 	})
 
 	// Sort by date, newest first
