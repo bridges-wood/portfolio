@@ -197,7 +197,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 				slug: slugify(postFileName.replace(/\.mdx?$/, '')),
 				wordCount: countWords(content),
 				isLocal: true,
-			}
+			};
 		}
 	)
 

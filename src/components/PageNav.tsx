@@ -24,7 +24,7 @@ const StyledLink = styled(Link, {
 const PageNav: FC<PageNavProps> = ({ tag, prevRoute, nextRoute }) => {
 	const { theme } = useTheme()
 	return (
-		<Container
+        <Container
 			display='flex'
 			justify='space-between'
 			className='page-nav'
@@ -33,8 +33,8 @@ const PageNav: FC<PageNavProps> = ({ tag, prevRoute, nextRoute }) => {
 		>
 			{prevRoute ? (
 				<NextLink
-					href={addTagToSlug(removeAfterLast(prevRoute.path || '', '.'), tag)}
-				>
+                    href={addTagToSlug(removeAfterLast(prevRoute.path || '', '.'), tag)}
+                    legacyBehavior>
 					<StyledLink block className='pag-nav__link'>
 						{prevRoute.title}
 					</StyledLink>
@@ -44,15 +44,15 @@ const PageNav: FC<PageNavProps> = ({ tag, prevRoute, nextRoute }) => {
 			)}
 			{nextRoute ? (
 				<NextLink
-					href={addTagToSlug(removeAfterLast(nextRoute.path || '', '.'), tag)}
-				>
+                    href={addTagToSlug(removeAfterLast(nextRoute.path || '', '.'), tag)}
+                    legacyBehavior>
 					<StyledLink block className='page-nav__link'>
 						{nextRoute.title}
 					</StyledLink>
 				</NextLink>
 			) : null}
 		</Container>
-	)
+    );
 }
 
 export default PageNav

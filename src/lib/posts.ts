@@ -52,5 +52,5 @@ export const slugify = (str: string): string => {
  * @returns A formatted slug.
  */
 export const formatSlug = (slug: string): string => {
-	return slug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
+	return slug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 }

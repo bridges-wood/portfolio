@@ -166,14 +166,14 @@ const FeaturedProject: FC<FeaturedProjectProps> = ({
           }}
         >
           <Link href={github} passHref>
-            <a>
-              <Github fill={theme.colors.accents9.value} />
-            </a>
+
+            <Github fill={theme.colors.accents9.value} />
+
           </Link>
           <Link href={url} passHref>
-            <a>
-              <LinkExternal fill={theme.colors.accents9.value} />
-            </a>
+
+            <LinkExternal fill={theme.colors.accents9.value} />
+
           </Link>
         </Row>
       </Col>

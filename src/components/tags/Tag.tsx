@@ -11,7 +11,7 @@ const Tag: FC<PropsWithChildren<TagProps>> = ({ children: tag, ...props }) => {
 	}
 
 	return (
-		<Link
+        (<Link
 			href={{
 				pathname: '/tags/[slug]',
 				query: {
@@ -20,11 +20,11 @@ const Tag: FC<PropsWithChildren<TagProps>> = ({ children: tag, ...props }) => {
 			}}
 			passHref
 		>
-			<a>
-				<Badge {...props}>{tag}</Badge>
-			</a>
-		</Link>
-	)
+
+            <Badge {...props}>{tag}</Badge>
+
+        </Link>)
+    );
 }
 
 export default Tag

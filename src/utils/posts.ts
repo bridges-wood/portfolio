@@ -33,9 +33,9 @@ export const getPostsByTag = _.memoize(
 					slug: slugify(postFileName.replace(/\.mdx?$/, '')),
 					wordCount: countWords(content),
 					isLocal: true,
-				} as FrontMatterWithWordCount
+				} as FrontMatterWithWordCount;
 			})
-			.filter((post) => post.tags.includes(tag))
+			.filter((post) => post.tags.includes(tag));
 	}
 )
 

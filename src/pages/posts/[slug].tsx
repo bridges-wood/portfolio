@@ -23,22 +23,28 @@ import unwrapImages from 'remark-unwrap-images'
  * @see https://github.com/vercel/next.js/blob/canary/examples/with-mdx-remote/pages/posts/%5Bslug%5D.js
  */
 const components: MDXRemoteProps['components'] = {
-	img: ({ src, alt, placeholder, style, ...props }) => (
-		<div
-			style={{
-				margin: '12px 0',
-			}}
-		>
-			<Image
-				src={src}
-				alt={alt}
-				layout='intrinsic'
-				loading='lazy'
-				placeholder={placeholder as ImageProps['placeholder']}
-				{...props}
-			/>
-		</div>
-	),
+	img: ({ src, alt, placeholder, style, height, width, ...props }) => {
+		return (
+			<div
+				style={{
+					position: 'relative',
+					overflow: 'hidden',
+					height: '400px',
+					margin: '12px 0',
+				}}
+			>
+				<Image
+					src={src}
+					alt={alt}
+					fill
+					placeholder={placeholder as ImageProps['placeholder']}
+					style={{ objectFit: 'contain', ...style }}
+					priority
+					{...props}
+				/>
+			</div>
+		)
+	},
 
 	h1: (props) => <AnchoredHeading h1 {...props} />,
 	h2: (props) => <AnchoredHeading h2 {...props} />,

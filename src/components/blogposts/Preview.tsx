@@ -32,7 +32,7 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 	const isSm = useBreakpoint('sm')
 
 	return (
-		<Row
+        <Row
 			className='blogpost__preview'
 			css={{
 				w: '100%',
@@ -72,57 +72,58 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 						}}
 					/>
 				</Row>
-				<Link href={href} passHref>
-					<a
-						style={{
-							color: 'inherit',
-						}}
-					>
-						<Text
-							h2
-							css={{
-								display: '-webkit-box',
-								'-webkit-box-orient': 'vertical',
-								textOverflow: 'ellipsis',
-								textDecorationThickness: 'auto',
-								overflow: 'hidden',
-								fontWeight: '$bold',
-								fontSize: '$xl2',
-								'@smMax': {
-									fontSize: '$md',
-									maxH: '40px',
-									lh: '20px',
-									'-webkit-line-clamp': '2',
-								},
-							}}
-						>
-							{title}
-						</Text>
-						{subtitle && (
-							<Text
-								h3
-								css={{
-									display: '-webkit-box',
-									'-webkit-box-orient': 'vertical',
-									textOverflow: 'ellipsis',
-									textDecorationThickness: 'auto',
-									overflow: 'hidden',
-									fontSize: '$md',
-									color: '$accents6',
-									pt: '$2',
-									'@xsMax': {
-										display: 'none',
-									},
-									'@xs': {
-										'-webkit-line-clamp': '1',
-									},
-								}}
-							>
-								{subtitle}
-							</Text>
-						)}
-					</a>
-				</Link>
+				<Link
+                    href={href}
+                    passHref
+                    style={{
+                        color: 'inherit',
+                    }}>
+
+                    <Text
+                        h2
+                        css={{
+                            display: '-webkit-box',
+                            '-webkit-box-orient': 'vertical',
+                            textOverflow: 'ellipsis',
+                            textDecorationThickness: 'auto',
+                            overflow: 'hidden',
+                            fontWeight: '$bold',
+                            fontSize: '$xl2',
+                            '@smMax': {
+                                fontSize: '$md',
+                                maxH: '40px',
+                                lh: '20px',
+                                '-webkit-line-clamp': '2',
+                            },
+                        }}
+                    >
+                        {title}
+                    </Text>
+                    {subtitle && (
+                        <Text
+                            h3
+                            css={{
+                                display: '-webkit-box',
+                                '-webkit-box-orient': 'vertical',
+                                textOverflow: 'ellipsis',
+                                textDecorationThickness: 'auto',
+                                overflow: 'hidden',
+                                fontSize: '$md',
+                                color: '$accents6',
+                                pt: '$2',
+                                '@xsMax': {
+                                    display: 'none',
+                                },
+                                '@xs': {
+                                    '-webkit-line-clamp': '1',
+                                },
+                            }}
+                        >
+                            {subtitle}
+                        </Text>
+                    )}
+
+                </Link>
 				<Row
 					css={{
 						mt: 'auto',
@@ -254,28 +255,28 @@ const BlogpostPreview: FC<BlogpostPreviewProps> = ({
 			>
 				<Row>
 					<Link href={href} passHref>
-						<a>
-							<Image
-								src={coverImage}
-								alt='Placeholder'
-								objectFit={isSm ? 'cover' : 'contain'}
-								containerCss={{
-									'@xsMax': {
-										w: '100px',
-										h: '100px',
-									},
-									'@sm': {
-										w: '150px',
-										h: '100px',
-									},
-								}}
-							/>
-						</a>
-					</Link>
+
+                        <Image
+                            src={coverImage}
+                            alt='Placeholder'
+                            objectFit={isSm ? 'cover' : 'contain'}
+                            containerCss={{
+                                '@xsMax': {
+                                    w: '100px',
+                                    h: '100px',
+                                },
+                                '@sm': {
+                                    w: '150px',
+                                    h: '100px',
+                                },
+                            }}
+                        />
+
+                    </Link>
 				</Row>
 			</Col>
 		</Row>
-	)
+    );
 }
 
 export default BlogpostPreview

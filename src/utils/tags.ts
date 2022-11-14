@@ -4,5 +4,5 @@
  * @returns The slug.
  */
 export const tagToSlug = (tag: string) => {
-	return tag.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()
+	return tag.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
 }

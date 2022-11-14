@@ -17,7 +17,7 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 	const { isDark } = useTheme()
 
 	return (
-		<NextNavbar
+        <NextNavbar
 			variant='sticky'
 			isBordered={isDark}
 			shouldHideOnScroll={
@@ -34,10 +34,10 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 			/>
 			<NextNavbar.Brand>
 				<NextLink href='/' passHref>
-					<a>
-						<Logo />
-					</a>
-				</NextLink>
+
+                    <Logo />
+
+                </NextLink>
 			</NextNavbar.Brand>
 			<NextNavbar.Toggle showIn='sm' />
 			<NextNavbar.Content
@@ -122,7 +122,7 @@ const Navbar: React.FC<ComponentProps> = ({ routes, hasNotify, isHome }) => {
 				</NextNavbar.CollapseItem>
 			</NextNavbar.Collapse>
 		</NextNavbar>
-	)
+    );
 }
 
 export default Navbar

@@ -18,5 +18,5 @@ export const getHeadings = (source: string): Heading[] => {
 			text,
 			slug,
 		}
-	})
+	});
 }

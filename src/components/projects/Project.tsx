@@ -39,16 +39,16 @@ const Project: FC<ProjectProps> = ({ project }) => {
         >
           <Folder size={48} fill={theme.colors.primary.value} />
           <Link href={project.url} passHref>
-            <a>
-              <Github fill={theme.colors.accents9.value} />
-            </a>
+
+            <Github fill={theme.colors.accents9.value} />
+
           </Link>
           {project.website_url ? (
-            <Link href={project.website_url} passHref>
-              <a>
-                <LinkExternal fill={theme.colors.accents9.value} />
-              </a>
-            </Link>
+            (<Link href={project.website_url} passHref>
+
+              <LinkExternal fill={theme.colors.accents9.value} />
+
+            </Link>)
           ) : null}
         </Row>
       </Card.Header>

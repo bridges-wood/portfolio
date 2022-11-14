@@ -78,7 +78,7 @@ const NavLink: FC<NavLinkProps> = ({
 	}
 
 	return (
-		<NextLink href={!comingSoon ? pathname || href : ''}>
+        <NextLink href={!comingSoon ? pathname || href : ''} legacyBehavior>
 			<BaseLink
 				href={pathname}
 				selected={selected}
@@ -95,7 +95,7 @@ const NavLink: FC<NavLinkProps> = ({
 				{title}
 			</BaseLink>
 		</NextLink>
-	)
+    );
 }
 
 export default NavLink

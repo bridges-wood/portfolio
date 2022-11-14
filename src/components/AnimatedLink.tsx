@@ -13,7 +13,7 @@ const AnimatedLink: FC<AnimatedLinkProps> = ({
 	onClick,
 	...props
 }) => (
-	<NextLink href={href || ''}>
+	<NextLink href={href || ''} legacyBehavior>
 		<Link
 			href={href}
 			onClick={onClick}
